@@ -11,9 +11,9 @@ const TopicQuizBanner = ({ topicId, topicTitle, onVerified }) => {
         <div>
           <div className="flex items-center gap-2">
             <Trophy size={20} className="text-yellow-400" />
-            <span className="text-sm font-semibold text-white">Topic Complete: {topicTitle}</span>
+            <span className="text-sm font-semibold text-primary">Topic Complete: {topicTitle}</span>
           </div>
-          <div className="mt-1 text-xs text-[#666]">
+          <div className="mt-1 text-xs text-secondary">
             Take the verification quiz for this topic to save your score.
           </div>
         </div>

@@ -122,14 +122,14 @@ const QuizModal = ({
   return (
     <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm">
       <div className="flex min-h-full items-center justify-center p-4">
-        <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-[#1f1f1f] bg-[#111] shadow-2xl">
+        <div className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-subtle bg-card shadow-2xl">
           {(phase === "loading" || phase === "submitting") && (
             <div className="flex flex-col items-center justify-center p-10 text-center">
               <Loader2 className="h-8 w-8 animate-spin text-[#6366f1]" />
-              <div className="mt-3 text-sm text-[#666]">
+              <div className="mt-3 text-sm text-secondary">
                 {phase === "loading" ? "Generating your quiz..." : "Submitting your answers..."}
               </div>
-              <div className="mt-1 text-xs text-[#444]">
+              <div className="mt-1 text-xs text-muted">
                 {phase === "loading"
                   ? "Powered by Gemini AI"
                   : "Updating your profile"}
@@ -144,13 +144,13 @@ const QuizModal = ({
               <div className="mt-6 flex justify-center gap-3">
                 <button
                   onClick={loadQuiz}
-                  className="rounded-lg bg-[#1f1f1f] px-5 py-2.5 text-sm text-white hover:bg-[#2a2a2a]"
+                  className="rounded-lg bg-skeleton px-5 py-2.5 text-sm text-primary hover:bg-[#2a2a2a]"
                 >
                   Retry
                 </button>
                 <button
                   onClick={onClose}
-                  className="rounded-lg border border-[#1f1f1f] px-5 py-2.5 text-sm text-[#999] hover:text-white"
+                  className="rounded-lg border border-subtle px-5 py-2.5 text-sm text-[#999] hover:text-primary"
                 >
                   Close
                 </button>
@@ -160,25 +160,25 @@ const QuizModal = ({
 
           {phase === "quiz" && quiz && (
             <>
-              <div className="flex items-center justify-between border-b border-[#1f1f1f] px-6 py-4">
+              <div className="flex items-center justify-between border-b border-subtle px-6 py-4">
                 <div className="flex items-center gap-2">
                   <span
                     className="rounded-full bg-purple-500/10 px-2.5 py-1 text-xs font-medium uppercase tracking-wide text-purple-400"
                   >
                     Topic Verification
                   </span>
-                  <div className="text-sm font-semibold text-white">
+                  <div className="text-sm font-semibold text-primary">
                     {topicTitle}
                   </div>
                 </div>
-                <div className="rounded bg-[#1a1a1a] px-2 py-1 text-xs text-[#666]">One-time quiz</div>
+                <div className="rounded bg-card-hover px-2 py-1 text-xs text-secondary">One-time quiz</div>
               </div>
 
               <div className="space-y-6 px-6 py-6">
                 {quiz.mcq.map((question, index) => (
-                  <div key={question.id} className="rounded-xl border border-[#1f1f1f] bg-[#0a0a0a] p-5">
+                  <div key={question.id} className="rounded-xl border border-subtle bg-main p-5">
                     <div className="text-xs font-medium uppercase text-[#6366f1]">Q{index + 1}</div>
-                    <div className="mt-1 text-sm font-medium text-white">{question.question}</div>
+                    <div className="mt-1 text-sm font-medium text-primary">{question.question}</div>
                     <div className="mt-3 space-y-2">
                       {["A", "B", "C", "D"].map((optKey) => {
                         const selected = mcqAnswers[String(question.id)] === optKey;
@@ -191,13 +191,13 @@ const QuizModal = ({
                             }
                             className={`flex w-full items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all duration-200 ${
                               selected
-                                ? "border-[#6366f1] bg-indigo-500/10 text-white"
-                                : "border-[#1f1f1f] bg-[#111] text-[#666] hover:border-[#333] hover:text-white"
+                                ? "border-[#6366f1] bg-indigo-500/10 text-primary"
+                                : "border-subtle bg-card text-secondary hover:border-hover hover:text-primary"
                             }`}
                           >
                             <span
                               className={`flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                                selected ? "bg-[#6366f1] text-white" : "bg-[#1a1a1a] text-[#666]"
+                                selected ? "bg-[#6366f1] text-white" : "bg-card-hover text-secondary"
                               }`}
                             >
                               {optKey}
@@ -211,8 +211,8 @@ const QuizModal = ({
                 ))}
               </div>
 
-              <div className="flex items-center justify-between border-t border-[#1f1f1f] px-6 py-4">
-                <div className="text-xs text-[#444]">
+              <div className="flex items-center justify-between border-t border-subtle px-6 py-4">
+                <div className="text-xs text-muted">
                   {answeredCount}/{totalQuestions} answered
                 </div>
                 <button
@@ -229,31 +229,31 @@ const QuizModal = ({
 
           {phase === "results" && results && (
             <>
-              <div className="flex items-center gap-2 border-b border-[#1f1f1f] px-6 py-4">
+              <div className="flex items-center gap-2 border-b border-subtle px-6 py-4">
                 <CheckCircle2 className="h-5 w-5 text-green-400" />
                 <div className="text-sm font-semibold text-green-400">Topic Completed!</div>
               </div>
 
-              <div className="mx-6 mt-6 rounded-xl border border-[#1f1f1f] bg-[#0a0a0a] p-5 text-center">
-                <div className="text-4xl font-bold text-white">
+              <div className="mx-6 mt-6 rounded-xl border border-subtle bg-main p-5 text-center">
+                <div className="text-4xl font-bold text-primary">
                   {results.totalScore} / {results.maxScore}
                 </div>
-                <div className="mt-1 text-sm text-[#666]">Your Score</div>
-                <p className="mt-4 text-xs text-[#444]">
+                <div className="mt-1 text-sm text-secondary">Your Score</div>
+                <p className="mt-4 text-xs text-muted">
                   This score is now saved to your public profile.
                 </p>
               </div>
 
               <div className="mx-6 mt-6">
-                <div className="mb-3 text-sm font-semibold text-white">Review Answers</div>
+                <div className="mb-3 text-sm font-semibold text-primary">Review Answers</div>
                 {(quiz?.mcq || []).map((q) => {
                   const userAnswer = mcqAnswers[String(q.id)];
                   const correctAnswer = results.correctAnswers?.[String(q.id)] || q.correct;
                   const isCorrect = userAnswer === correctAnswer;
                   return (
-                    <div key={q.id} className="mb-3 rounded-xl border border-[#1f1f1f] bg-[#0a0a0a] p-4">
-                      <div className="text-xs text-[#666]">{q.question}</div>
-                      <div className="mt-2 flex items-center gap-2 text-sm text-white">
+                    <div key={q.id} className="mb-3 rounded-xl border border-subtle bg-main p-4">
+                      <div className="text-xs text-secondary">{q.question}</div>
+                      <div className="mt-2 flex items-center gap-2 text-sm text-primary">
                         {isCorrect ? (
                           <CheckCircle2 className="h-4 w-4 text-green-400" />
                         ) : (
@@ -267,7 +267,7 @@ const QuizModal = ({
                             <CheckCircle2 className="h-4 w-4 text-green-400" />
                             Correct: {q.options[correctAnswer]}
                           </div>
-                          <div className="mt-1 text-xs italic text-[#666]">{q.explanation}</div>
+                          <div className="mt-1 text-xs italic text-secondary">{q.explanation}</div>
                         </>
                       )}
                     </div>
@@ -275,7 +275,7 @@ const QuizModal = ({
                 })}
               </div>
 
-              <div className="mt-6 flex items-center justify-end border-t border-[#1f1f1f] px-6 py-4">
+              <div className="mt-6 flex items-center justify-end border-t border-subtle px-6 py-4">
                 <button
                   type="button"
                   onClick={() => {
@@ -293,7 +293,7 @@ const QuizModal = ({
           <button
             type="button"
             onClick={onClose}
-            className="absolute right-6 top-6 text-[#666] hover:text-white"
+            className="absolute right-6 top-6 text-secondary hover:text-primary"
           >
             <X size={16} />
           </button>

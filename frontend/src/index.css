@@ -2,14 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #0a0a0a;
-  color: #ffffff;
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
+@layer base {
+  :root {
+    --bg-main: #fcfcfc;
+    --bg-card: #ffffff;
+    --bg-card-hover: #f7f7f8;
+    --border-subtle: #e5e7eb;
+    --border-hover: #d1d5db;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --bg-input: #ffffff;
+    --skeleton: #f3f4f6;
+  }
+
+  .dark {
+    --bg-main: #09090b;
+    --bg-card: #18181b;
+    --bg-card-hover: #27272a;
+    --border-subtle: #27272a;
+    --border-hover: #3f3f46;
+    --text-primary: #fafafa;
+    --text-secondary: #a1a1aa;
+    --text-muted: #71717a;
+    --bg-input: #09090b;
+    --skeleton: #27272a;
+  }
+
+  body {
+    @apply bg-[var(--bg-main)] text-[var(--text-primary)] transition-colors duration-200 font-sans antialiased;
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  .bg-main { background-color: var(--bg-main); }
+  .bg-card { background-color: var(--bg-card); }
+  .bg-card-hover { background-color: var(--bg-card-hover); }
+  .border-subtle { border-color: var(--border-subtle); }
+  .border-hover { border-color: var(--border-hover); }
+  .text-primary { color: var(--text-primary); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-muted { color: var(--text-muted); }
+  .bg-input { background-color: var(--bg-input); }
+  .bg-muted { background-color: var(--text-muted); }
+  .bg-skeleton { background-color: var(--skeleton); }
 }
 
 #root {

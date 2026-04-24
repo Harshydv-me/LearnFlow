@@ -9,7 +9,7 @@ const StatsCard = ({ label, value, helper, icon }) => {
         </div>
         <div className="text-sm text-gray-400">{label}</div>
       </div>
-      <div className="mt-4 text-2xl font-semibold text-white">{value}</div>
+      <div className="mt-4 text-2xl font-semibold text-primary">{value}</div>
       {helper && <div className="mt-2 text-xs text-gray-500">{helper}</div>}
     </GlowCard>
   );

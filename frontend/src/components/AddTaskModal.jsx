@@ -51,15 +51,15 @@ const AddTaskModal = ({ isOpen, onClose, onSave, editingTask }) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 backdrop-blur-sm" onClick={onClose}>
-      <div className="w-full max-w-md animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 bg-[#111] p-6 shadow-2xl shadow-black/50" onClick={(e) => e.stopPropagation()}>
+      <div className="w-full max-w-md animate-in fade-in-0 zoom-in-95 slide-in-from-bottom-4 bg-card p-6 shadow-2xl shadow-black/50" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
         <div className="mb-6 flex items-center justify-between">
-          <h2 className="text-lg font-semibold text-white">
+          <h2 className="text-lg font-semibold text-primary">
             {editingTask ? "Edit Task" : "Add Custom Task"}
           </h2>
           <button
             onClick={onClose}
-            className="text-[#666] hover:text-white hover:bg-[#1f1f1f] p-1.5 rounded-lg transition-all duration-200"
+            className="text-secondary hover:text-primary hover:bg-skeleton p-1.5 rounded-lg transition-all duration-200"
           >
             <X size={18} />
           </button>
@@ -67,7 +67,7 @@ const AddTaskModal = ({ isOpen, onClose, onSave, editingTask }) => {
 
         {/* Title Field */}
         <div className="mb-4">
-          <label className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-[#666]">
+          <label className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-secondary">
             Title
           </label>
           <input
@@ -76,7 +76,7 @@ const AddTaskModal = ({ isOpen, onClose, onSave, editingTask }) => {
             onChange={(e) => setTitle(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="What do you want to learn or do?"
-            className="w-full bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg px-4 py-2.5 text-white text-sm placeholder-[#444] focus:border-[#6366f1] focus:outline-none transition-all duration-200"
+            className="w-full bg-main border border-subtle rounded-lg px-4 py-2.5 text-primary text-sm placeholder-muted focus:border-[#6366f1] focus:outline-none transition-all duration-200"
             autoFocus
           />
           {error && (
@@ -89,7 +89,7 @@ const AddTaskModal = ({ isOpen, onClose, onSave, editingTask }) => {
 
         {/* Description Field */}
         <div className="mb-4">
-          <label className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-[#666]">
+          <label className="mb-1.5 block text-xs font-medium uppercase tracking-wide text-secondary">
             Notes
           </label>
           <textarea
@@ -97,13 +97,13 @@ const AddTaskModal = ({ isOpen, onClose, onSave, editingTask }) => {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Add any notes or details..."
             rows={3}
-            className="w-full resize-none bg-[#0a0a0a] border border-[#1f1f1f] rounded-lg px-4 py-2.5 text-white text-sm placeholder-[#444] focus:border-[#6366f1] focus:outline-none transition-all duration-200"
+            className="w-full resize-none bg-main border border-subtle rounded-lg px-4 py-2.5 text-primary text-sm placeholder-muted focus:border-[#6366f1] focus:outline-none transition-all duration-200"
           />
         </div>
 
         {/* Priority Field */}
         <div className="mb-6">
-          <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-[#666]">
+          <label className="mb-2 block text-xs font-medium uppercase tracking-wide text-secondary">
             Priority
           </label>
           <div className="flex gap-2">
@@ -118,7 +118,7 @@ const AddTaskModal = ({ isOpen, onClose, onSave, editingTask }) => {
                 className={`flex-1 rounded-lg border py-2 text-xs font-medium transition-all duration-200 ${
                   priority === value
                     ? `bg-${color}-500/10 border-${color}-500/40 text-${color}-400`
-                    : "bg-[#0a0a0a] border-[#1f1f1f] text-[#444] hover:border-[#333] hover:text-[#666]"
+                    : "bg-main border-subtle text-muted hover:border-hover hover:text-secondary"
                 }`}
               >
                 <div className={`mb-1 inline-block h-1.5 w-1.5 rounded-full bg-${color}-400`} />
@@ -132,7 +132,7 @@ const AddTaskModal = ({ isOpen, onClose, onSave, editingTask }) => {
         <div className="flex gap-3">
           <button
             onClick={onClose}
-            className="flex-1 border border-[#1f1f1f] py-2.5 text-sm text-[#666] hover:border-[#333] hover:text-white rounded-lg transition-all duration-200"
+            className="flex-1 border border-subtle py-2.5 text-sm text-secondary hover:border-hover hover:text-primary rounded-lg transition-all duration-200"
           >
             Cancel
           </button>

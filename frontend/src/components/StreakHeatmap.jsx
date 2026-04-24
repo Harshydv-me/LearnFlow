@@ -1,11 +1,11 @@
 import { useMemo, useState } from "react";
 
 const colors = {
-  0: "#161616",
-  1: "#1f2937",
-  2: "#3730a3",
-  3: "#4f46e5",
-  4: "#6366f1"
+  0: "var(--bg-card-hover)",
+  1: "#a5b4fc", // indigo-300
+  2: "#818cf8", // indigo-400
+  3: "#6366f1", // indigo-500
+  4: "#4f46e5"  // indigo-600
 };
 
 const formatDate = (date) =>
@@ -104,14 +104,14 @@ const StreakHeatmap = ({ data }) => {
 
   return (
     <div>
-      <div className="mb-1 text-sm font-semibold text-white">Learning Consistency</div>
-      <div className="text-xs text-[#666]">
+      <div className="mb-1 text-sm font-semibold text-primary">Learning Consistency</div>
+      <div className="text-xs text-secondary">
         Track your daily learning momentum.
       </div>
 
       <div className="relative mt-6">
         {hover && (
-          <div className="pointer-events-none absolute -top-10 left-0 z-10 rounded-md border border-[#1f1f1f] bg-[#0f0f0f] px-3 py-2 text-xs text-white shadow-lg">
+          <div className="pointer-events-none absolute -top-10 left-0 z-10 rounded-md border border-subtle bg-card px-3 py-2 text-xs text-primary shadow-lg">
             {hover.count} tasks completed on {hover.label}
           </div>
         )}

@@ -3,16 +3,16 @@ const SkillSelector = ({ skills, selectedSkillId, onSelect }) => {
 
   return (
     <div className="space-y-2">
-      <label className="text-xs uppercase tracking-wide text-[#666]">
+      <label className="text-xs uppercase tracking-wide text-secondary">
         Select Skill
       </label>
       {isLoading ? (
-        <div className="h-10 w-full animate-pulse rounded-lg bg-[#1f1f1f]" />
+        <div className="h-10 w-full animate-pulse rounded-lg bg-skeleton" />
       ) : (
         <select
           value={selectedSkillId || ""}
           onChange={(event) => onSelect(Number(event.target.value))}
-          className="w-full rounded-lg border border-[#1f1f1f] bg-[#111] px-4 py-2.5 text-sm text-white transition-all duration-200 hover:border-[#333] focus:border-[#6366f1] focus:outline-none"
+          className="w-full rounded-lg border border-subtle bg-card px-4 py-2.5 text-sm text-primary transition-all duration-200 hover:border-hover focus:border-[#6366f1] focus:outline-none"
         >
           {skills.map((skill) => (
             <option key={skill.id} value={skill.id}>

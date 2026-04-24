@@ -28,7 +28,7 @@ import {
 } from "../api/dashboard.js";
 
 const Skeleton = ({ className }) => (
-  <div className={`animate-pulse rounded bg-[#1f1f1f] ${className}`} />
+  <div className={`animate-pulse rounded bg-skeleton ${className}`} />
 );
 
 const Dashboard = ({ token }) => {
@@ -275,12 +275,12 @@ const Dashboard = ({ token }) => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-main text-primary">
       <Navbar />
 
       <main className="mx-auto max-w-6xl px-6 py-8">
-        <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-        <p className="mt-2 text-sm text-[#666]">
+        <h1 className="text-3xl font-bold text-primary">Dashboard</h1>
+        <p className="mt-2 text-sm text-secondary">
           Build momentum with daily practice and smart tracking.
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
@@ -292,54 +292,54 @@ const Dashboard = ({ token }) => {
           </button>
           <button
             onClick={() => navigate("/roadmap")}
-            className="rounded-lg border border-[#1f1f1f] px-4 py-2 text-sm text-white transition-all duration-200 hover:bg-[#1f1f1f]"
+            className="rounded-lg border border-subtle px-4 py-2 text-sm text-primary transition-all duration-200 hover:bg-card-hover"
           >
             View Roadmap
           </button>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
-              <CheckSquare size={18} className="text-[#666]" />
+          <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
+              <CheckSquare size={18} className="text-secondary" />
               Tasks Completed
             </div>
-            <div className="mt-2 text-3xl font-bold text-white">
+            <div className="mt-2 text-3xl font-bold text-primary">
               {loading ? <Skeleton className="h-8 w-16" /> : totalTasksCompleted}
             </div>
             <span className="mt-1 inline-block rounded-full bg-green-400/10 px-2 py-0.5 text-xs text-green-400">
               +{weeklyCompleted || 0} this week
             </span>
           </div>
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
-              <TrendingUp size={18} className="text-[#666]" />
+          <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
+              <TrendingUp size={18} className="text-secondary" />
               Learning Progress
             </div>
-            <div className="mt-2 text-3xl font-bold text-white">
+            <div className="mt-2 text-3xl font-bold text-primary">
               {loading ? <Skeleton className="h-8 w-16" /> : `${progressValue}%`}
             </div>
-            <span className="mt-1 inline-block text-xs text-[#666]">Across all skills</span>
+            <span className="mt-1 inline-block text-xs text-secondary">Across all skills</span>
           </div>
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
-              <Zap size={18} className="text-[#666]" />
+          <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
+              <Zap size={18} className="text-secondary" />
               Current Streak
             </div>
-            <div className="mt-2 text-3xl font-bold text-white">
+            <div className="mt-2 text-3xl font-bold text-primary">
               {loading ? <Skeleton className="h-8 w-16" /> : `${streakCurrent} days`}
             </div>
-            <span className="mt-1 inline-block text-xs text-[#666]">Keep the streak alive</span>
+            <span className="mt-1 inline-block text-xs text-secondary">Keep the streak alive</span>
           </div>
-          <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
-              <Trophy size={18} className="text-[#666]" />
+          <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+            <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
+              <Trophy size={18} className="text-secondary" />
               Longest Streak
             </div>
-            <div className="mt-2 text-3xl font-bold text-white">
+            <div className="mt-2 text-3xl font-bold text-primary">
               {loading ? <Skeleton className="h-8 w-16" /> : `${streakLongest} days`}
             </div>
-            <span className="mt-1 inline-block text-xs text-[#666]">Your personal best</span>
+            <span className="mt-1 inline-block text-xs text-secondary">Your personal best</span>
           </div>
         </div>
 
@@ -375,10 +375,10 @@ const Dashboard = ({ token }) => {
 
         <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
           <GlowCard>
-            <div className="text-sm font-semibold text-white">Activity</div>
+            <div className="text-sm font-semibold text-primary">Activity</div>
             <div className="mt-4">
               {activityItems.length === 0 ? (
-                <div className="text-xs text-[#666]">No activity yet.</div>
+                <div className="text-xs text-secondary">No activity yet.</div>
               ) : (
                 <ActivityTimeline items={activityItems} />
               )}
@@ -388,16 +388,16 @@ const Dashboard = ({ token }) => {
           <GlowCard>
             <div className="flex items-center justify-between">
               <div>
-                <div className="text-sm font-semibold text-white">Learning Tasks</div>
-                <div className="mt-1 text-xs text-[#666]">
+                <div className="text-sm font-semibold text-primary">Learning Tasks</div>
+                <div className="mt-1 text-xs text-secondary">
                   Complete in sequence to unlock the next step.
                 </div>
                 {activeTopicInfo?.title && (
                   <div className="mt-2">
-                    <div className="text-[10px] uppercase tracking-wide text-[#666]">
+                    <div className="text-[10px] uppercase tracking-wide text-secondary">
                       {activeTopicInfo.skillName || "Current Topic"}
                     </div>
-                    <div className="text-sm font-medium text-white">
+                    <div className="text-sm font-medium text-primary">
                       {activeTopicInfo.title}
                     </div>
                   </div>
@@ -406,11 +406,11 @@ const Dashboard = ({ token }) => {
             </div>
 
             <div className="mt-4">
-              <div className="flex items-center justify-between text-xs text-[#666]">
+              <div className="flex items-center justify-between text-xs text-secondary">
                 <span>Progress</span>
                 <span>{taskProgress}%</span>
               </div>
-              <div className="mt-2 h-1 w-full rounded-full bg-[#1f1f1f]">
+              <div className="mt-2 h-1 w-full rounded-full bg-skeleton">
                 <div
                   className="h-1 rounded-full bg-[#6366f1] transition-all duration-200"
                   style={{ width: `${taskProgress}%` }}
@@ -420,7 +420,7 @@ const Dashboard = ({ token }) => {
 
             <div className="mt-4 space-y-3">
               {roadmapLoading ? (
-                <div className="text-xs text-[#666]">Loading tasks...</div>
+                <div className="text-xs text-secondary">Loading tasks...</div>
               ) : (
                 roadmapTasks.map((task) => {
                   const isCompleted = task.completed;
@@ -434,12 +434,12 @@ const Dashboard = ({ token }) => {
                     ? "bg-green-500/10 text-green-400"
                     : isUnlocked
                       ? "bg-yellow-500/10 text-yellow-400"
-                      : "bg-[#1f1f1f] text-[#444]";
+                      : "bg-skeleton text-muted";
 
                   return (
                     <div
                       key={task.id}
-                      className="flex items-start gap-3 rounded-xl border border-[#1f1f1f] bg-[#111] p-3 transition-all duration-200 hover:border-[#333]"
+                      className="flex items-start gap-3 rounded-xl border border-subtle bg-card p-3 transition-all duration-200 hover:border-hover"
                     >
                       <input
                         type="checkbox"
@@ -450,16 +450,16 @@ const Dashboard = ({ token }) => {
                             handleComplete(task.id);
                           }
                         }}
-                        className="mt-1 h-4 w-4 rounded border-[#333] bg-[#0a0a0a] text-[#6366f1]"
+                        className="mt-1 h-4 w-4 rounded border-hover bg-main text-[#6366f1]"
                       />                      <div className="flex-1">
                         <div
                           className={`text-sm font-medium ${
-                            isCompleted ? "text-[#666] line-through" : "text-white"
+                            isCompleted ? "text-secondary line-through" : "text-primary"
                           }`}
                         >
                           {task.title}
                         </div>
-                        <div className="mt-0.5 text-xs text-[#666]">
+                        <div className="mt-0.5 text-xs text-secondary">
                           {task.description}
                         </div>
                       </div>
@@ -484,28 +484,28 @@ const Dashboard = ({ token }) => {
                   {allTopicTasksCompleted && topicVerified && (
                   <div className="mt-4 flex items-center gap-2 rounded-xl border border-green-500/20 bg-green-500/10 p-4">
                   <span className="text-sm font-semibold text-green-400">Topic Verified ✓</span>
-                  <span className="ml-auto text-xs text-[#666]">{topicVerificationScore}/10 score</span>
+                  <span className="ml-auto text-xs text-secondary">{topicVerificationScore}/10 score</span>
                   </div>
                   )}
                   </GlowCard>
                   </div>
 
-                  {/* Custom Tasks Section */}        <div className="mt-6 pt-6 border-t border-[#1f1f1f]">
+                  {/* Custom Tasks Section */}        <div className="mt-6 pt-6 border-t border-subtle">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <ClipboardList size={14} className="text-[#6366f1]" />
-              <span className="text-xs font-semibold text-white uppercase tracking-wide">
+              <span className="text-xs font-semibold text-primary uppercase tracking-wide">
                 My Tasks
               </span>
               {customTasks.length > 0 && (
-                <span className="text-xs bg-[#1f1f1f] text-[#666] px-1.5 py-0.5 rounded-full">
+                <span className="text-xs bg-skeleton text-secondary px-1.5 py-0.5 rounded-full">
                   {customTasks.filter(t => !t.completed).length}
                 </span>
               )}
             </div>
             <button
               onClick={() => { setEditingTask(null); setIsModalOpen(true); }}
-              className="flex items-center gap-2 rounded-lg border border-[#1f1f1f] px-3 py-1 text-xs text-[#666] transition-all duration-200 hover:border-[#333] hover:text-white"
+              className="flex items-center gap-2 rounded-lg border border-subtle px-3 py-1 text-xs text-secondary transition-all duration-200 hover:border-hover hover:text-primary"
             >
               <Plus size={14} />
               Add Task

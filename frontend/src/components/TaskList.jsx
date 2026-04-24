@@ -118,7 +118,7 @@ const TaskList = ({ topicId, items, topicTitle }) => {
         <div className="flex items-center gap-2 rounded-xl border border-green-500/20 bg-green-500/10 p-4">
           <BadgeCheck size={18} className="text-green-400" />
           <span className="text-sm font-semibold text-green-400">Topic Verified ✓</span>
-          <span className="ml-auto text-xs text-[#666]">{verificationScore}% score</span>
+          <span className="ml-auto text-xs text-secondary">{verificationScore}% score</span>
         </div>
       )}
     </div>

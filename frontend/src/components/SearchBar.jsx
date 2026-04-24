@@ -101,8 +101,8 @@ const SearchBar = () => {
 
   return (
     <div className="relative">
-      <div className="flex w-64 items-center gap-2 rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] px-3 py-2 transition-all duration-200 focus-within:border-[#6366f1] lg:w-80">
-        <Search size={15} className="flex-shrink-0 text-[#444]" />
+      <div className="flex w-64 items-center gap-2 rounded-lg border border-subtle bg-main px-3 py-2 transition-all duration-200 focus-within:border-[#6366f1] lg:w-80">
+        <Search size={15} className="flex-shrink-0 text-muted" />
         <input
           ref={inputRef}
           type="text"
@@ -110,7 +110,7 @@ const SearchBar = () => {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           onKeyDown={handleKeyDown}
-          className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder-[#444] outline-none"
+          className="min-w-0 flex-1 bg-transparent text-sm text-primary placeholder-muted outline-none"
         />
         {query.length > 0 && (
           <button
@@ -119,7 +119,7 @@ const SearchBar = () => {
               setQuery("");
               setIsOpen(false);
             }}
-            className="text-[#444] transition-colors duration-150 hover:text-white"
+            className="text-muted transition-colors duration-150 hover:text-primary"
           >
             {loading ? <Loader2 size={14} className="animate-spin" /> : <X size={14} />}
           </button>
@@ -129,29 +129,29 @@ const SearchBar = () => {
       {showDropdown && (
         <div
           ref={dropdownRef}
-          className="absolute left-0 top-full z-50 mt-2 w-full min-w-[380px] overflow-hidden rounded-xl border border-[#1f1f1f] bg-[#111] shadow-2xl shadow-black/50"
+          className="absolute left-0 top-full z-50 mt-2 w-full min-w-[380px] overflow-hidden rounded-xl border border-subtle bg-card shadow-2xl shadow-black/50"
         >
           {results.skills.length > 0 && (
             <div>
-              <div className="border-b border-[#1f1f1f] bg-[#0a0a0a] px-4 py-2 text-xs font-medium uppercase tracking-wider text-[#444]">
+              <div className="border-b border-subtle bg-main px-4 py-2 text-xs font-medium uppercase tracking-wider text-muted">
                 Skills
               </div>
               {results.skills.map((skill) => (
                 <div
                   key={skill.id}
                   onClick={() => handleResultClick("skill", skill.id)}
-                  className="flex cursor-pointer items-center gap-3 border-b border-[#0f0f0f] px-4 py-3 transition-colors duration-150 hover:bg-[#1a1a1a] last:border-0"
+                  className="flex cursor-pointer items-center gap-3 border-b border-[#0f0f0f] px-4 py-3 transition-colors duration-150 hover:bg-card-hover last:border-0"
                 >
                   <Layers size={16} className="flex-shrink-0 text-[#6366f1]" />
                   <div className="flex-1">
-                    <div className="text-sm font-medium text-white">
+                    <div className="text-sm font-medium text-primary">
                       {highlightMatch(skill.name, query)}
                     </div>
-                    <div className="mt-0.5 max-w-xs truncate text-xs text-[#666]">
+                    <div className="mt-0.5 max-w-xs truncate text-xs text-secondary">
                       {skill.description}
                     </div>
                   </div>
-                  <ChevronRight size={14} className="text-[#333]" />
+                  <ChevronRight size={14} className="text-muted" />
                 </div>
               ))}
             </div>
@@ -159,22 +159,22 @@ const SearchBar = () => {
 
           {results.topics.length > 0 && (
             <div>
-              <div className="border-b border-[#1f1f1f] bg-[#0a0a0a] px-4 py-2 text-xs font-medium uppercase tracking-wider text-[#444]">
+              <div className="border-b border-subtle bg-main px-4 py-2 text-xs font-medium uppercase tracking-wider text-muted">
                 Topics
               </div>
               {results.topics.map((topic) => (
                 <div
                   key={topic.id}
                   onClick={() => handleResultClick("topic", topic.id)}
-                  className="flex cursor-pointer items-center gap-3 border-b border-[#0f0f0f] px-4 py-3 transition-colors duration-150 hover:bg-[#1a1a1a] last:border-0"
+                  className="flex cursor-pointer items-center gap-3 border-b border-[#0f0f0f] px-4 py-3 transition-colors duration-150 hover:bg-card-hover last:border-0"
                 >
                   <BookOpen size={16} className="flex-shrink-0 text-purple-400" />
                   <div className="flex-1">
-                    <div className="text-sm font-medium text-white">
+                    <div className="text-sm font-medium text-primary">
                       {highlightMatch(topic.title, query)}
                     </div>
                     <div className="mt-0.5 flex items-center gap-2">
-                      <span className="rounded bg-[#1a1a1a] px-1.5 py-0.5 text-xs text-[#666]">
+                      <span className="rounded bg-card-hover px-1.5 py-0.5 text-xs text-secondary">
                         {topic.skillName}
                       </span>
                       {topic.status === "in_progress" && (
@@ -189,7 +189,7 @@ const SearchBar = () => {
                       )}
                     </div>
                   </div>
-                  <div className="text-xs text-[#666]">{topic.progressPercentage}%</div>
+                  <div className="text-xs text-secondary">{topic.progressPercentage}%</div>
                 </div>
               ))}
             </div>
@@ -197,12 +197,12 @@ const SearchBar = () => {
 
           {results.skills.length === 0 && results.topics.length === 0 && !loading && (
             <div className="px-4 py-6 text-center">
-              <Search size={20} className="mx-auto text-[#333]" />
-              <div className="mt-2 text-sm text-[#666]">No results for "{query}"</div>
+              <Search size={20} className="mx-auto text-muted" />
+              <div className="mt-2 text-sm text-secondary">No results for "{query}"</div>
             </div>
           )}
 
-          <div className="flex items-center justify-between border-t border-[#1f1f1f] bg-[#0a0a0a] px-4 py-2 text-xs text-[#444]">
+          <div className="flex items-center justify-between border-t border-subtle bg-main px-4 py-2 text-xs text-muted">
             <span>Press Enter to see all results</span>
             <CornerDownLeft size={12} />
           </div>

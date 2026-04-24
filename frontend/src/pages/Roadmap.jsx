@@ -173,7 +173,6 @@ const Roadmap = () => {
   }, [selectedTopic]);
 
   const handleTopicSelect = (topic) => {
-    if (topic.isLocked) return;
     setSelectedTopic(topic);
   };
 
@@ -230,12 +229,12 @@ const Roadmap = () => {
   }, [isPanelOpen]);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-main text-primary">
       <Navbar />
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">Roadmap</h1>
-          <p className="mt-1 text-sm text-[#666]">
+          <h1 className="text-3xl font-bold text-primary">Roadmap</h1>
+          <p className="mt-1 text-sm text-secondary">
             Follow the learning path and unlock topics as you progress.
           </p>
         </div>

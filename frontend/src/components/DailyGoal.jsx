@@ -37,14 +37,14 @@ const DailyGoal = ({ goalTasks, completedTasks, percentage, onGoalUpdate }) => {
   const progressColor = percentage >= 100 ? "bg-green-500" : "bg-[#6366f1]";
 
   return (
-    <div className="bg-[#111] border border-[#1f1f1f] rounded-xl p-6">
+    <div className="bg-card border border-subtle rounded-xl p-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <div className="text-sm font-semibold text-white">Today's Goal</div>
+        <div className="text-sm font-semibold text-primary">Today's Goal</div>
         {!editing && (
           <button
             onClick={() => setEditing(true)}
-            className="text-[#666] hover:text-white transition-colors duration-200 p-1"
+            className="text-secondary hover:text-primary transition-colors duration-200 p-1"
           >
             <Pencil size={14} />
           </button>
@@ -56,13 +56,13 @@ const DailyGoal = ({ goalTasks, completedTasks, percentage, onGoalUpdate }) => {
         {!editing ? (
           <div className="flex items-center gap-2">
             <Target size={16} className="text-[#6366f1]" />
-            <span className="text-sm text-[#666]">
+            <span className="text-sm text-secondary">
               Complete {goalTasks} tasks today
             </span>
           </div>
         ) : (
           <div className="flex items-center gap-2 mt-2">
-            <span className="text-sm text-[#666]">Complete</span>
+            <span className="text-sm text-secondary">Complete</span>
             <input
               type="number"
               min="1"
@@ -70,10 +70,10 @@ const DailyGoal = ({ goalTasks, completedTasks, percentage, onGoalUpdate }) => {
               value={inputVal}
               onChange={(e) => setInputVal(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="w-16 bg-[#0a0a0a] border border-[#6366f1] rounded-lg px-2 py-1 text-white text-sm text-center focus:outline-none"
+              className="w-16 bg-main border border-[#6366f1] rounded-lg px-2 py-1 text-primary text-sm text-center focus:outline-none"
               autoFocus
             />
-            <span className="text-sm text-[#666]">tasks today</span>
+            <span className="text-sm text-secondary">tasks today</span>
 
             <button
               onClick={handleSaveGoal}
@@ -88,7 +88,7 @@ const DailyGoal = ({ goalTasks, completedTasks, percentage, onGoalUpdate }) => {
                 setEditing(false);
                 setInputVal(goalTasks);
               }}
-              className="text-[#666] hover:text-white hover:bg-[#1f1f1f] px-2 py-1 rounded-lg transition-all duration-200"
+              className="text-secondary hover:text-primary hover:bg-skeleton px-2 py-1 rounded-lg transition-all duration-200"
             >
               <X size={12} />
             </button>
@@ -98,11 +98,11 @@ const DailyGoal = ({ goalTasks, completedTasks, percentage, onGoalUpdate }) => {
 
       {/* Progress Section */}
       <div className="mt-4">
-        <div className="flex items-center justify-between text-xs text-[#666]">
+        <div className="flex items-center justify-between text-xs text-secondary">
           <span>Progress</span>
           <span>{percentage}%</span>
         </div>
-        <div className="mt-2 h-1.5 w-full rounded-full bg-[#1f1f1f]">
+        <div className="mt-2 h-1.5 w-full rounded-full bg-skeleton">
           <div
             className={`h-1.5 rounded-full ${progressColor} transition-all duration-500`}
             style={{ width: `${Math.min(100, percentage)}%` }}
@@ -110,7 +110,7 @@ const DailyGoal = ({ goalTasks, completedTasks, percentage, onGoalUpdate }) => {
         </div>
       </div>
 
-      <div className="mt-3 text-xs text-[#666]">
+      <div className="mt-3 text-xs text-secondary">
         {completedTasks} / {goalTasks} tasks completed
       </div>
 

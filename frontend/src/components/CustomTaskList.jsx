@@ -5,11 +5,11 @@ const CustomTaskList = ({ tasks, onToggle, onEdit, onDelete, loading }) => {
     return (
       <div className="space-y-3">
         {[1, 2].map((i) => (
-          <div key={i} className="flex items-start gap-3 rounded-xl border border-[#1f1f1f] bg-[#111] p-3">
-            <div className="mt-1 h-4 w-4 animate-pulse rounded bg-[#1f1f1f]" />
+          <div key={i} className="flex items-start gap-3 rounded-xl border border-subtle bg-card p-3">
+            <div className="mt-1 h-4 w-4 animate-pulse rounded bg-skeleton" />
             <div className="flex-1 space-y-2">
-              <div className="h-4 w-3/4 animate-pulse rounded bg-[#1f1f1f]" />
-              <div className="h-3 w-1/2 animate-pulse rounded bg-[#1f1f1f]" />
+              <div className="h-4 w-3/4 animate-pulse rounded bg-skeleton" />
+              <div className="h-3 w-1/2 animate-pulse rounded bg-skeleton" />
             </div>
           </div>
         ))}
@@ -20,9 +20,9 @@ const CustomTaskList = ({ tasks, onToggle, onEdit, onDelete, loading }) => {
   if (tasks.length === 0) {
     return (
       <div className="py-6 text-center">
-        <ClipboardList size={24} className="mx-auto text-[#333]" />
-        <p className="mt-2 text-sm text-[#666]">No custom tasks yet</p>
-        <p className="mt-1 text-xs text-[#444]">Click Add Task to create one</p>
+        <ClipboardList size={24} className="mx-auto text-muted" />
+        <p className="mt-2 text-sm text-secondary">No custom tasks yet</p>
+        <p className="mt-1 text-xs text-muted">Click Add Task to create one</p>
       </div>
     );
   }
@@ -53,7 +53,7 @@ const CustomTaskList = ({ tasks, onToggle, onEdit, onDelete, loading }) => {
         return (
           <div
             key={task.id}
-            className="group flex items-start gap-3 rounded-xl border border-[#1f1f1f] bg-[#111] p-3 transition-all duration-200 hover:border-[#333]"
+            className="group flex items-start gap-3 rounded-xl border border-subtle bg-card p-3 transition-all duration-200 hover:border-hover"
           >
             {/* Checkbox */}
             <button
@@ -63,7 +63,7 @@ const CustomTaskList = ({ tasks, onToggle, onEdit, onDelete, loading }) => {
               {task.completed ? (
                 <CheckSquare size={18} className="text-green-400" />
               ) : (
-                <Square size={18} className="text-[#444] hover:text-[#6366f1]" />
+                <Square size={18} className="text-muted hover:text-[#6366f1]" />
               )}
             </button>
 
@@ -73,19 +73,19 @@ const CustomTaskList = ({ tasks, onToggle, onEdit, onDelete, loading }) => {
                 <div className={`h-1.5 w-1.5 flex-shrink-0 rounded-full ${priorityColors[task.priority]}`} />
                 <span
                   className={`text-sm font-medium ${
-                    task.completed ? "text-[#444] line-through" : "text-white"
+                    task.completed ? "text-muted line-through" : "text-primary"
                   }`}
                 >
                   {task.title}
                 </span>
               </div>
               {task.description && (
-                <p className="mt-0.5 text-xs text-[#666] line-clamp-1">
+                <p className="mt-0.5 text-xs text-secondary line-clamp-1">
                   {task.description}
                 </p>
               )}
               {task.completed && task.completed_at && (
-                <p className="mt-0.5 text-xs text-[#444]">
+                <p className="mt-0.5 text-xs text-muted">
                   Completed {formatRelativeTime(task.completed_at)}
                 </p>
               )}
@@ -95,13 +95,13 @@ const CustomTaskList = ({ tasks, onToggle, onEdit, onDelete, loading }) => {
             <div className="flex items-center gap-1 opacity-0 transition-opacity duration-200 group-hover:opacity-100">
               <button
                 onClick={() => onEdit(task)}
-                className="text-[#666] hover:text-white hover:bg-[#1f1f1f] rounded-lg p-1.5 transition-all duration-200"
+                className="text-secondary hover:text-primary hover:bg-skeleton rounded-lg p-1.5 transition-all duration-200"
               >
                 <Pencil size={14} />
               </button>
               <button
                 onClick={() => onDelete(task.id)}
-                className="text-[#666] hover:text-red-400 hover:bg-red-500/10 rounded-lg p-1.5 transition-all duration-200"
+                className="text-secondary hover:text-red-400 hover:bg-red-500/10 rounded-lg p-1.5 transition-all duration-200"
               >
                 <Trash2 size={14} />
               </button>

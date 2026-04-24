@@ -150,27 +150,27 @@ const LearningHub = () => {
   ).length;
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-main text-primary">
       <Navbar />
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">Learning</h1>
-          <p className="mt-1 text-sm text-[#666]">
+          <h1 className="text-3xl font-bold text-primary">Learning</h1>
+          <p className="mt-1 text-sm text-secondary">
             Continue building your skills step by step.
           </p>
         </div>
 
-        <div className="mt-4 inline-flex items-center gap-6 rounded-xl border border-[#1f1f1f] bg-[#111] px-5 py-3">
+        <div className="mt-4 inline-flex items-center gap-6 rounded-xl border border-subtle bg-card px-5 py-3">
           <div className="flex items-center gap-2">
             <Zap size={18} className="text-yellow-400" />
-            <span className="text-sm font-semibold text-white">
+            <span className="text-sm font-semibold text-primary">
               {streak.current_streak_days} day streak
             </span>
           </div>
-          <div className="h-4 w-px bg-[#1f1f1f]" />
+          <div className="h-4 w-px bg-skeleton" />
           <div className="flex items-center gap-2">
             <Flame size={16} className="text-orange-400" />
-            <span className="text-sm text-[#666]">
+            <span className="text-sm text-secondary">
               Longest: {streak.longest_streak_days} days
             </span>
           </div>
@@ -193,11 +193,11 @@ const LearningHub = () => {
 
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_380px]">
           <div>
-            <div className="mb-4 text-sm font-semibold text-white">Skills</div>
+            <div className="mb-4 text-sm font-semibold text-primary">Skills</div>
             {loading ? (
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {Array.from({ length: 2 }).map((_, idx) => (
-                  <div key={idx} className="h-36 w-full animate-pulse rounded-xl bg-[#1f1f1f]" />
+                  <div key={idx} className="h-36 w-full animate-pulse rounded-xl bg-skeleton" />
                 ))}
               </div>
             ) : (
@@ -209,7 +209,7 @@ const LearningHub = () => {
             )}
 
             <div className="mt-6 flex items-center justify-between">
-              <div className="text-sm font-semibold text-white">Recommended</div>
+              <div className="text-sm font-semibold text-primary">Recommended</div>
               <div
                 onClick={() => navigate("/roadmap")}
                 className="cursor-pointer text-xs text-[#6366f1] transition-all duration-200 hover:text-indigo-400"
@@ -235,22 +235,22 @@ const LearningHub = () => {
               onVerified={handleTopicVerified}
             />
 
-            <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5">
-              <div className="mb-4 text-sm font-semibold text-white">Quick Stats</div>
+            <div className="rounded-xl border border-subtle bg-card p-5">
+              <div className="mb-4 text-sm font-semibold text-primary">Quick Stats</div>
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-[#666]">
+                  <div className="flex items-center gap-2 text-sm text-secondary">
                     <Target size={16} className="text-[#6366f1]" />
                     Skills in progress
                   </div>
-                  <div className="text-sm font-semibold text-white">{inProgressCount}</div>
+                  <div className="text-sm font-semibold text-primary">{inProgressCount}</div>
                 </div>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2 text-sm text-[#666]">
+                  <div className="flex items-center gap-2 text-sm text-secondary">
                     <CheckCircle2 size={16} className="text-green-400" />
                     Skills completed
                   </div>
-                  <div className="text-sm font-semibold text-white">{completedCount}</div>
+                  <div className="text-sm font-semibold text-primary">{completedCount}</div>
                 </div>
               </div>
             </div>

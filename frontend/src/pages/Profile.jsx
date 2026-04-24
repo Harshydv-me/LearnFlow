@@ -14,8 +14,8 @@ import Navbar from "../components/Navbar.jsx";
 import StreakHeatmap from "../components/StreakHeatmap.jsx";
 import dashboardApi, { getProfile, updateProfileName } from "../api/dashboard.js";
 
-const SkeletonBlock = ({ className }) => (
-  <div className={`animate-pulse rounded-xl bg-[#1f1f1f] ${className}`} />
+const Skeleton = ({ className }) => (
+  <div className={`animate-pulse rounded-xl bg-skeleton ${className}`} />
 );
 
 const getInitials = (name = "") => {
@@ -114,29 +114,29 @@ const Profile = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-main text-primary">
       <Navbar />
       <main className="mx-auto max-w-4xl px-6 py-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">Profile</h1>
-          <p className="mt-1 text-sm text-[#666]">
+          <h1 className="text-3xl font-bold text-primary">Profile</h1>
+          <p className="mt-1 text-sm text-secondary">
             Manage your account and track your learning journey.
           </p>
         </div>
 
         {loading ? (
           <div className="mt-8 space-y-6">
-            <SkeletonBlock className="h-32 w-full" />
+            <Skeleton className="h-32 w-full" />
             <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
               {Array.from({ length: 4 }).map((_, idx) => (
-                <SkeletonBlock key={idx} className="h-24 w-full" />
+                <Skeleton key={idx} className="h-24 w-full" />
               ))}
             </div>
-            <SkeletonBlock className="h-40 w-full" />
+            <Skeleton className="h-40 w-full" />
           </div>
         ) : (
           <>
-            <div className="mt-8 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+            <div className="mt-8 rounded-xl border border-subtle bg-card p-6">
               <div className="flex items-start gap-6">
                 <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#6366f1] text-2xl font-bold text-white">
                   {initials}
@@ -145,7 +145,7 @@ const Profile = () => {
                   <div className="flex flex-wrap items-center gap-3">
                     {!editingName ? (
                       <>
-                        <div className="text-2xl font-bold text-white">
+                        <div className="text-2xl font-bold text-primary">
                           {profile?.user?.display_name}
                         </div>
                         <button
@@ -153,7 +153,7 @@ const Profile = () => {
                             setEditingName(true);
                             setNameError("");
                           }}
-                          className="text-[#666] transition-colors duration-200 hover:text-white"
+                          className="text-secondary transition-colors duration-200 hover:text-primary"
                         >
                           <Edit2 size={16} />
                         </button>
@@ -167,7 +167,7 @@ const Profile = () => {
                             if (event.key === "Enter") handleSaveName();
                             if (event.key === "Escape") handleCancelEdit();
                           }}
-                          className="w-64 rounded-lg border border-[#6366f1] bg-[#0a0a0a] px-3 py-1.5 text-xl font-bold text-white outline-none focus:ring-1 focus:ring-[#6366f1]"
+                          className="w-64 rounded-lg border border-[#6366f1] bg-main px-3 py-1.5 text-xl font-bold text-primary outline-none focus:ring-1 focus:ring-[#6366f1]"
                           autoFocus
                         />
                         <button
@@ -182,7 +182,7 @@ const Profile = () => {
                         </button>
                         <button
                           onClick={handleCancelEdit}
-                          className="rounded-lg border border-[#1f1f1f] px-3 py-1.5 text-sm text-[#666] transition-all duration-200 hover:border-[#333] hover:text-white"
+                          className="rounded-lg border border-subtle px-3 py-1.5 text-sm text-secondary transition-all duration-200 hover:border-hover hover:text-primary"
                         >
                           <X size={16} />
                         </button>
@@ -204,8 +204,8 @@ const Profile = () => {
                     </div>
                   )}
 
-                  <div className="mt-1 text-sm text-[#666]">{profile?.user?.email}</div>
-                  <div className="mt-1 text-xs text-[#444]">
+                  <div className="mt-1 text-sm text-secondary">{profile?.user?.email}</div>
+                  <div className="mt-1 text-xs text-muted">
                     Member since {profile?.user?.member_since}
                   </div>
                 </div>
@@ -213,38 +213,38 @@ const Profile = () => {
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4 text-center">
+              <div className="rounded-xl border border-subtle bg-card p-4 text-center">
                 <CheckSquare size={20} className="mx-auto text-[#6366f1]" />
-                <div className="mt-2 text-2xl font-bold text-white">
+                <div className="mt-2 text-2xl font-bold text-primary">
                   {stats.totalTasksCompleted}
                 </div>
-                <div className="mt-1 text-xs text-[#666]">Tasks Done</div>
+                <div className="mt-1 text-xs text-secondary">Tasks Done</div>
               </div>
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4 text-center">
+              <div className="rounded-xl border border-subtle bg-card p-4 text-center">
                 <BookOpen size={20} className="mx-auto text-purple-400" />
-                <div className="mt-2 text-2xl font-bold text-white">
+                <div className="mt-2 text-2xl font-bold text-primary">
                   {stats.totalTopicsCompleted}
                 </div>
-                <div className="mt-1 text-xs text-[#666]">Topics Finished</div>
+                <div className="mt-1 text-xs text-secondary">Topics Finished</div>
               </div>
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4 text-center">
+              <div className="rounded-xl border border-subtle bg-card p-4 text-center">
                 <Layers size={20} className="mx-auto text-orange-400" />
-                <div className="mt-2 text-2xl font-bold text-white">
+                <div className="mt-2 text-2xl font-bold text-primary">
                   {stats.totalSkillsStarted}
                 </div>
-                <div className="mt-1 text-xs text-[#666]">Skills Started</div>
+                <div className="mt-1 text-xs text-secondary">Skills Started</div>
               </div>
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-4 text-center">
+              <div className="rounded-xl border border-subtle bg-card p-4 text-center">
                 <Flame size={20} className="mx-auto text-yellow-400" />
-                <div className="mt-2 text-2xl font-bold text-white">
+                <div className="mt-2 text-2xl font-bold text-primary">
                   {stats.longestStreak} days
                 </div>
-                <div className="mt-1 text-xs text-[#666]">Best Streak</div>
+                <div className="mt-1 text-xs text-secondary">Best Streak</div>
               </div>
             </div>
 
             <div className="mt-6">
-              <div className="mb-4 text-sm font-semibold text-white">
+              <div className="mb-4 text-sm font-semibold text-primary">
                 Learning Activity
               </div>
               <StreakHeatmap data={heatmapData} />

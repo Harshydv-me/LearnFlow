@@ -23,11 +23,11 @@ const TodayTasks = ({
 
   if (loading) {
     return (
-      <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
-        <div className="mb-4 text-sm font-semibold text-white">Today&apos;s Tasks</div>
+      <div className="rounded-xl border border-subtle bg-card p-6">
+        <div className="mb-4 text-sm font-semibold text-primary">Today&apos;s Tasks</div>
         <div className="space-y-3">
           {Array.from({ length: 3 }).map((_, idx) => (
-            <div key={idx} className="h-16 w-full animate-pulse rounded-xl bg-[#1f1f1f]" />
+            <div key={idx} className="h-16 w-full animate-pulse rounded-xl bg-skeleton" />
           ))}
         </div>
       </div>
@@ -36,10 +36,10 @@ const TodayTasks = ({
 
   if (!tasks || tasks.length === 0) {
     return (
-      <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6 text-center">
+      <div className="rounded-xl border border-subtle bg-card p-6 text-center">
         <CheckCircle2 className="mx-auto h-6 w-6 text-green-400" />
-        <div className="mt-3 text-sm text-[#666]">No tasks for today</div>
-        <div className="mt-1 text-xs text-[#444]">You are all caught up!</div>
+        <div className="mt-3 text-sm text-secondary">No tasks for today</div>
+        <div className="mt-1 text-xs text-muted">You are all caught up!</div>
       </div>
     );
   }
@@ -48,8 +48,8 @@ const TodayTasks = ({
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
-        <div className="mb-4 text-sm font-semibold text-white">Today&apos;s Tasks</div>
+      <div className="rounded-xl border border-subtle bg-card p-6">
+        <div className="mb-4 text-sm font-semibold text-primary">Today&apos;s Tasks</div>
         <div className="space-y-3">
           {displayTasks.map((task) => {
             const isCompleted = task.completed;
@@ -82,22 +82,22 @@ const TodayTasks = ({
                       <Circle size={18} />
                     </button>
                   ) : (
-                    <Lock size={14} className="text-[#333]" />
+                    <Lock size={14} className="text-muted" />
                   )}
                 </div>
                 <div className="flex-1">
                   <div
                     className={`text-sm ${
                       isCompleted
-                        ? "text-[#444] line-through"
+                        ? "text-muted line-through"
                         : isUnlocked
-                          ? "text-white"
-                          : "text-[#444]"
+                          ? "text-primary"
+                          : "text-muted"
                     }`}
                   >
                     {task.title}
                   </div>
-                  <div className="mt-0.5 text-xs text-[#666]">{task.description}</div>
+                  <div className="mt-0.5 text-xs text-secondary">{task.description}</div>
                 </div>
                 <div>
                   {isCompleted ? (
@@ -109,7 +109,7 @@ const TodayTasks = ({
                       Start
                     </span>
                   ) : (
-                    <span className="rounded-full bg-[#1f1f1f] px-2 py-0.5 text-xs text-[#444]">
+                    <span className="rounded-full bg-skeleton px-2 py-0.5 text-xs text-muted">
                       Locked
                     </span>
                   )}
@@ -140,7 +140,7 @@ const TodayTasks = ({
         <div className="flex items-center gap-2 rounded-xl border border-green-500/20 bg-green-500/10 p-4">
           <Trophy size={16} className="text-green-400" />
           <span className="text-sm font-semibold text-green-400">Topic Verified ✓</span>
-          <span className="ml-auto text-xs text-[#666]">{topicVerificationScore}/10 score</span>
+          <span className="ml-auto text-xs text-secondary">{topicVerificationScore}/10 score</span>
         </div>
       )}
     </div>

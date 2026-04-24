@@ -21,9 +21,9 @@ const RecommendationCard = ({ recommendation, loading }) => {
 
   if (loading) {
     return (
-      <div className="animate-pulse rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
-        <div className="h-4 w-48 rounded bg-[#1f1f1f]" />
-        <div className="mt-3 h-3 w-32 rounded bg-[#1f1f1f]" />
+      <div className="animate-pulse rounded-xl border border-subtle bg-card p-6">
+        <div className="h-4 w-48 rounded bg-skeleton" />
+        <div className="mt-3 h-3 w-32 rounded bg-skeleton" />
       </div>
     );
   }
@@ -34,12 +34,12 @@ const RecommendationCard = ({ recommendation, loading }) => {
 
   if (recommendation.type === "complete") {
     return (
-      <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+      <div className="rounded-xl border border-subtle bg-card p-6">
         <Trophy size={24} className="text-yellow-400" />
-        <div className="mt-3 text-lg font-semibold text-white">
+        <div className="mt-3 text-lg font-semibold text-primary">
           All content completed!
         </div>
-        <div className="mt-1 text-sm text-[#666]">
+        <div className="mt-1 text-sm text-secondary">
           {recommendation.message}
         </div>
       </div>
@@ -74,7 +74,7 @@ const RecommendationCard = ({ recommendation, loading }) => {
   };
 
   return (
-    <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6 transition-all duration-200 hover:border-[#333]">
+    <div className="rounded-xl border border-subtle bg-card p-6 transition-all duration-200 hover:border-hover">
       <div className="flex items-center justify-between">
         <span
           className={`rounded-full px-2.5 py-1 text-xs font-medium uppercase tracking-wide ${badgeClass}`}
@@ -85,14 +85,14 @@ const RecommendationCard = ({ recommendation, loading }) => {
       </div>
 
       <div className="mt-4">
-        <div className="text-xs uppercase tracking-wide text-[#666]">
+        <div className="text-xs uppercase tracking-wide text-secondary">
           {recommendation.skill}
         </div>
-        <div className="mt-1 text-xl font-bold text-white">
+        <div className="mt-1 text-xl font-bold text-primary">
           {recommendation.topic}
         </div>
         {recommendation.type === "task" && recommendation.task && (
-          <div className="mt-1.5 flex items-center gap-1 text-sm text-[#666]">
+          <div className="mt-1.5 flex items-center gap-1 text-sm text-secondary">
             <ChevronRight size={14} className="text-[#6366f1]" />
             Next: {recommendation.task}
           </div>
@@ -102,7 +102,7 @@ const RecommendationCard = ({ recommendation, loading }) => {
             {recommendation.tasksLeft} tasks left
           </div>
         )}
-        <div className="mt-3 text-sm italic text-[#666]">
+        <div className="mt-3 text-sm italic text-secondary">
           {recommendation.message}
         </div>
       </div>

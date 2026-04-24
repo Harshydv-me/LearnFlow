@@ -46,13 +46,13 @@ const PublicProfile = () => {
   );
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <nav className="flex items-center justify-between border-b border-[#1f1f1f] bg-[#111] px-6 py-4">
-        <div className="text-lg font-bold text-white">LearnFlow</div>
+    <div className="min-h-screen bg-main text-primary">
+      <nav className="flex items-center justify-between border-b border-subtle bg-card px-6 py-4">
+        <div className="text-lg font-bold text-primary">LearnFlow</div>
         <button
           type="button"
           onClick={() => navigate("/login")}
-          className="rounded-lg border border-[#1f1f1f] px-4 py-2 text-sm text-[#666] transition-all duration-200 hover:text-white"
+          className="rounded-lg border border-subtle px-4 py-2 text-sm text-secondary transition-all duration-200 hover:text-primary"
         >
           Sign Up Free
         </button>
@@ -60,20 +60,20 @@ const PublicProfile = () => {
 
       {notFound ? (
         <div className="mt-32 text-center">
-          <div className="text-2xl font-bold text-white">Profile not found</div>
-          <div className="mt-2 text-sm text-[#666]">
+          <div className="text-2xl font-bold text-primary">Profile not found</div>
+          <div className="mt-2 text-sm text-secondary">
             This user does not exist or has a private profile
           </div>
         </div>
       ) : loading ? (
         <main className="mx-auto max-w-3xl px-6 py-12">
-          <div className="h-28 animate-pulse rounded-xl bg-[#1f1f1f]" />
+          <div className="h-28 animate-pulse rounded-xl bg-skeleton" />
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
             {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="h-24 animate-pulse rounded-xl bg-[#1f1f1f]" />
+              <div key={i} className="h-24 animate-pulse rounded-xl bg-skeleton" />
             ))}
           </div>
-          <div className="mt-8 h-48 animate-pulse rounded-xl bg-[#1f1f1f]" />
+          <div className="mt-8 h-48 animate-pulse rounded-xl bg-skeleton" />
         </main>
       ) : (
         <main className="mx-auto max-w-3xl px-6 py-12">
@@ -81,52 +81,52 @@ const PublicProfile = () => {
             <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#6366f1] text-2xl font-bold text-white">
               {initials}
             </div>
-            <div className="mt-4 text-3xl font-bold text-white">{profile?.user?.display_name}</div>
-            <div className="mt-1 text-sm text-[#666]">@{profile?.user?.username}</div>
-            <div className="mt-1 text-xs text-[#444]">Member since {profile?.user?.memberSince}</div>
+            <div className="mt-4 text-3xl font-bold text-primary">{profile?.user?.display_name}</div>
+            <div className="mt-1 text-sm text-secondary">@{profile?.user?.username}</div>
+            <div className="mt-1 text-xs text-muted">Member since {profile?.user?.memberSince}</div>
           </div>
 
           <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
-            <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 text-center">
+            <div className="rounded-xl border border-subtle bg-card p-5 text-center">
               <CheckSquare className="mx-auto text-[#6366f1]" size={20} />
-              <div className="mt-2 text-2xl font-bold text-white">{profile?.stats?.totalTasksCompleted || 0}</div>
-              <div className="mt-1 text-xs text-[#666]">Tasks Completed</div>
+              <div className="mt-2 text-2xl font-bold text-primary">{profile?.stats?.totalTasksCompleted || 0}</div>
+              <div className="mt-1 text-xs text-secondary">Tasks Completed</div>
             </div>
             <div
-              className={`rounded-xl border bg-[#111] p-5 text-center ${
+              className={`rounded-xl border bg-card p-5 text-center ${
                 (profile?.stats?.verifiedTopics || 0) > 0
                   ? "border-green-500/30"
-                  : "border-[#1f1f1f]"
+                  : "border-subtle"
               }`}
             >
               <BadgeCheck className="mx-auto text-green-400" size={20} />
-              <div className="mt-2 text-2xl font-bold text-white">{profile?.stats?.verifiedTopics || 0}</div>
-              <div className="mt-1 text-xs text-[#666]">Topics Verified</div>
+              <div className="mt-2 text-2xl font-bold text-primary">{profile?.stats?.verifiedTopics || 0}</div>
+              <div className="mt-1 text-xs text-secondary">Topics Verified</div>
             </div>
-            <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 text-center">
+            <div className="rounded-xl border border-subtle bg-card p-5 text-center">
               <Zap className="mx-auto text-yellow-400" size={20} />
-              <div className="mt-2 text-2xl font-bold text-white">{profile?.stats?.currentStreak || 0} days</div>
-              <div className="mt-1 text-xs text-[#666]">Current Streak</div>
+              <div className="mt-2 text-2xl font-bold text-primary">{profile?.stats?.currentStreak || 0} days</div>
+              <div className="mt-1 text-xs text-secondary">Current Streak</div>
             </div>
-            <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 text-center">
+            <div className="rounded-xl border border-subtle bg-card p-5 text-center">
               <Flame className="mx-auto text-orange-400" size={20} />
-              <div className="mt-2 text-2xl font-bold text-white">{profile?.stats?.longestStreak || 0} days</div>
-              <div className="mt-1 text-xs text-[#666]">Best Streak</div>
+              <div className="mt-2 text-2xl font-bold text-primary">{profile?.stats?.longestStreak || 0} days</div>
+              <div className="mt-1 text-xs text-secondary">Best Streak</div>
             </div>
           </div>
 
           <div className="mt-8">
-            <div className="mb-6 text-xl font-bold text-white">Skills</div>
+            <div className="mb-6 text-xl font-bold text-primary">Skills</div>
             {(profile?.skills || []).map((skill) => (
               <div
                 key={skill.id}
-                className={`mb-4 rounded-xl border bg-[#111] p-6 transition-all duration-200 hover:border-[#333] ${
-                  skill.isVerified ? "border-green-500/30" : "border-[#1f1f1f]"
+                className={`mb-4 rounded-xl border bg-card p-6 transition-all duration-200 hover:border-hover ${
+                  skill.isVerified ? "border-green-500/30" : "border-subtle"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="text-lg font-semibold text-white">{skill.name}</div>
+                    <div className="text-lg font-semibold text-primary">{skill.name}</div>
                     {skill.isVerified && (
                       <span className="inline-flex items-center gap-1 rounded-full bg-green-500/10 px-2.5 py-1 text-xs text-green-400">
                         <BadgeCheck size={12} />
@@ -139,22 +139,22 @@ const PublicProfile = () => {
                       skill.progressPercentage === 100
                         ? "text-green-400"
                         : skill.progressPercentage > 0
-                          ? "text-white"
-                          : "text-[#444]"
+                          ? "text-primary"
+                          : "text-muted"
                     }`}
                   >
                     {skill.progressPercentage}%
                   </div>
                 </div>
-                <div className="mt-1 text-sm text-[#666]">{skill.description}</div>
-                <div className="mt-4 h-2 w-full rounded-full bg-[#1f1f1f]">
+                <div className="mt-1 text-sm text-secondary">{skill.description}</div>
+                <div className="mt-4 h-2 w-full rounded-full bg-skeleton">
                   <div
                     className={`h-2 rounded-full transition-all duration-500 ${
                       skill.isVerified
                         ? "bg-green-500"
                         : skill.progressPercentage > 0
                           ? "bg-[#6366f1]"
-                          : "bg-[#1f1f1f]"
+                          : "bg-skeleton"
                     }`}
                     style={{ width: `${skill.progressPercentage}%` }}
                   />
@@ -162,13 +162,13 @@ const PublicProfile = () => {
                 
                 {skill.topics && skill.topics.length > 0 && (
                   <div className="mt-6 space-y-3">
-                    <div className="text-xs font-semibold uppercase tracking-wider text-[#444]">
+                    <div className="text-xs font-semibold uppercase tracking-wider text-muted">
                       Topic Progress
                     </div>
                     {skill.topics.map((topic) => (
                       <div
                         key={topic.id}
-                        className="flex items-center justify-between rounded-lg bg-[#0a0a0a] px-4 py-3 border border-[#1f1f1f]"
+                        className="flex items-center justify-between rounded-lg bg-main px-4 py-3 border border-subtle"
                       >
                         <div className="text-sm text-[#999]">{topic.title}</div>
                         {topic.score !== null ? (
@@ -179,14 +179,14 @@ const PublicProfile = () => {
                             <BadgeCheck size={16} className="text-green-400" />
                           </div>
                         ) : (
-                          <span className="text-xs text-[#444]">Not verified</span>
+                          <span className="text-xs text-muted">Not verified</span>
                         )}
                       </div>
                     ))}
                   </div>
                 )}
 
-                <div className="mt-4 flex items-center justify-between text-xs text-[#666]">
+                <div className="mt-4 flex items-center justify-between text-xs text-secondary">
                   <span>
                     {skill.completedTasks} / {skill.totalTasks} tasks
                   </span>
@@ -200,9 +200,9 @@ const PublicProfile = () => {
             ))}
           </div>
 
-          <footer className="mt-16 border-t border-[#1f1f1f] py-8 text-center">
-            <div className="text-xs text-[#444]">Powered by LearnFlow</div>
-            <div className="mt-1 text-xs text-[#333]">Track your learning journey</div>
+          <footer className="mt-16 border-t border-subtle py-8 text-center">
+            <div className="text-xs text-muted">Powered by LearnFlow</div>
+            <div className="mt-1 text-xs text-muted">Track your learning journey</div>
             <button
               type="button"
               onClick={() => navigate("/login")}

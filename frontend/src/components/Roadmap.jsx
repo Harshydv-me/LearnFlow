@@ -10,21 +10,21 @@ const RoadmapNode = ({ title, description, status, onClick }) => {
       type="button"
       disabled={isLocked}
       onClick={onClick}
-      className={`group flex w-full items-start justify-between gap-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-4 text-left transition-all duration-200 ${
+      className={`group flex w-full items-start justify-between gap-4 rounded-xl border border-subtle bg-card p-4 text-left transition-all duration-200 ${
         isLocked
           ? "cursor-not-allowed opacity-60"
-          : "hover:-translate-y-0.5 hover:border-[#333] hover:shadow-lg"
+          : "hover:-translate-y-0.5 hover:border-hover hover:shadow-lg"
       } ${isCurrent ? "ring-1 ring-[#6366f1]/40" : ""}`}
     >
       <div>
         <div
           className={`text-sm font-semibold ${
-            isCompleted ? "line-through text-[#666]" : "text-white"
+            isCompleted ? "line-through text-secondary" : "text-primary"
           }`}
         >
           {title}
         </div>
-        <div className="mt-1 text-xs text-[#666]">{description}</div>
+        <div className="mt-1 text-xs text-secondary">{description}</div>
       </div>
       <div className="mt-1">
         {isCompleted && <Check className="h-4 w-4 text-green-400" />}
@@ -64,7 +64,7 @@ const Roadmap = ({ tasks, onComplete }) => {
                 )}
               </div>
               {index < tasks.length - 1 && (
-                <div className="mt-2 h-full w-px flex-1 bg-[#1f1f1f]" />
+                <div className="mt-2 h-full w-px flex-1 bg-skeleton" />
               )}
             </div>
             <div className="flex-1">

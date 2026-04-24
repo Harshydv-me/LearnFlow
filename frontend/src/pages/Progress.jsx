@@ -28,7 +28,7 @@ import {
 } from "../api/dashboard.js";
 
 const Skeleton = ({ className }) => (
-  <div className={`animate-pulse rounded-xl bg-[#1f1f1f] ${className}`} />
+  <div className={`animate-pulse rounded-xl bg-skeleton ${className}`} />
 );
 
 const Progress = () => {
@@ -67,12 +67,12 @@ const Progress = () => {
   }, [insights]);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-main text-primary">
       <Navbar />
       <main className="mx-auto max-w-7xl px-6 py-8">
         <div>
-          <h1 className="text-3xl font-bold text-white">Progress</h1>
-          <p className="mt-1 text-sm text-[#666]">
+          <h1 className="text-3xl font-bold text-primary">Progress</h1>
+          <p className="mt-1 text-sm text-secondary">
             Track your learning journey across all skills.
           </p>
         </div>
@@ -95,45 +95,45 @@ const Progress = () => {
         ) : (
           <>
             <div className="mt-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
+              <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
                   <Zap size={18} className="text-[#6366f1]" />
                   This Week
                 </div>
-                <div className="mt-2 text-3xl font-bold text-white">
+                <div className="mt-2 text-3xl font-bold text-primary">
                   {insights?.totalThisWeek || 0}
                 </div>
-                <div className="mt-1 text-xs text-[#666]">tasks completed</div>
+                <div className="mt-1 text-xs text-secondary">tasks completed</div>
               </div>
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
+              <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
                   <Calendar size={18} className="text-purple-400" />
                   This Month
                 </div>
-                <div className="mt-2 text-3xl font-bold text-white">
+                <div className="mt-2 text-3xl font-bold text-primary">
                   {insights?.totalThisMonth || 0}
                 </div>
-                <div className="mt-1 text-xs text-[#666]">tasks completed</div>
+                <div className="mt-1 text-xs text-secondary">tasks completed</div>
               </div>
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
+              <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
                   <TrendingUp size={18} className="text-green-400" />
                   Daily Avg
                 </div>
-                <div className="mt-2 text-3xl font-bold text-white">
+                <div className="mt-2 text-3xl font-bold text-primary">
                   {insights?.averagePerDay || 0}
                 </div>
-                <div className="mt-1 text-xs text-[#666]">tasks per day (30d)</div>
+                <div className="mt-1 text-xs text-secondary">tasks per day (30d)</div>
               </div>
-              <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333]">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-[#666]">
+              <div className="rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover">
+                <div className="flex items-center gap-2 text-xs uppercase tracking-wide text-secondary">
                   <Star size={18} className="text-yellow-400" />
                   Best Day
                 </div>
-                <div className="mt-2 text-2xl font-bold text-white">
+                <div className="mt-2 text-2xl font-bold text-primary">
                   {insights?.mostProductiveDay?.day?.trim() || "—"}
                 </div>
-                <div className="mt-1 text-xs text-[#666]">
+                <div className="mt-1 text-xs text-secondary">
                   {insights?.mostProductiveDay
                     ? `${insights.mostProductiveDay.count} tasks on average`
                     : "No data yet"}
@@ -141,16 +141,16 @@ const Progress = () => {
               </div>
             </div>
 
-            <div className="mt-6 rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
+            <div className="mt-6 rounded-xl border border-subtle bg-card p-6">
               <div className="mb-6 flex items-center justify-between">
-                <div className="text-sm font-semibold text-white">Activity</div>
+                <div className="text-sm font-semibold text-primary">Activity</div>
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => setActiveChart("weekly")}
                     className={`rounded-lg px-3 py-1.5 text-xs transition-all duration-200 ${
                       activeChart === "weekly"
                         ? "bg-[#6366f1] text-white"
-                        : "bg-[#1a1a1a] text-[#666] hover:text-white"
+                        : "bg-card-hover text-secondary hover:text-primary"
                     }`}
                   >
                     7 days
@@ -160,7 +160,7 @@ const Progress = () => {
                     className={`rounded-lg px-3 py-1.5 text-xs transition-all duration-200 ${
                       activeChart === "monthly"
                         ? "bg-[#6366f1] text-white"
-                        : "bg-[#1a1a1a] text-[#666] hover:text-white"
+                        : "bg-card-hover text-secondary hover:text-primary"
                     }`}
                   >
                     30 days
@@ -171,9 +171,9 @@ const Progress = () => {
               <div className="h-64">
                 {isChartEmpty ? (
                   <div className="flex h-full flex-col items-center justify-center text-center">
-                    <BarChart2 size={32} className="text-[#333]" />
-                    <div className="mt-2 text-sm text-[#666]">No activity yet</div>
-                    <div className="mt-1 text-xs text-[#444]">
+                    <BarChart2 size={32} className="text-muted" />
+                    <div className="mt-2 text-sm text-secondary">No activity yet</div>
+                    <div className="mt-1 text-xs text-muted">
                       Complete tasks to see your progress chart
                     </div>
                   </div>
@@ -183,7 +183,7 @@ const Progress = () => {
                       <BarChart data={weeklyData}>
                         <CartesianGrid
                           strokeDasharray="3 3"
-                          stroke="#1f1f1f"
+                          stroke="var(--skeleton)"
                           vertical={false}
                         />
                         <XAxis
@@ -202,7 +202,7 @@ const Progress = () => {
                         <Tooltip
                           contentStyle={{
                             backgroundColor: "#111",
-                            border: "1px solid #1f1f1f",
+                            border: "1px solid var(--border-subtle)",
                             borderRadius: "8px",
                             color: "#fff",
                             fontSize: "12px"
@@ -222,7 +222,7 @@ const Progress = () => {
                         </defs>
                         <CartesianGrid
                           strokeDasharray="3 3"
-                          stroke="#1f1f1f"
+                          stroke="var(--skeleton)"
                           vertical={false}
                         />
                         <XAxis
@@ -242,7 +242,7 @@ const Progress = () => {
                         <Tooltip
                           contentStyle={{
                             backgroundColor: "#111",
-                            border: "1px solid #1f1f1f",
+                            border: "1px solid var(--border-subtle)",
                             borderRadius: "8px",
                             color: "#fff",
                             fontSize: "12px"
@@ -265,28 +265,28 @@ const Progress = () => {
             </div>
 
             <div className="mt-6">
-              <div className="mb-4 text-sm font-semibold text-white">Skills Breakdown</div>
+              <div className="mb-4 text-sm font-semibold text-primary">Skills Breakdown</div>
               {skills.length === 0 ? (
-                <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-8 text-center">
-                  <Layers size={32} className="mx-auto text-[#333]" />
-                  <div className="mt-2 text-sm text-[#666]">No skills data yet</div>
+                <div className="rounded-xl border border-subtle bg-card p-8 text-center">
+                  <Layers size={32} className="mx-auto text-muted" />
+                  <div className="mt-2 text-sm text-secondary">No skills data yet</div>
                 </div>
               ) : (
                 skills.map((skill) => (
                   <div
                     key={skill.id}
-                    className="mb-3 rounded-xl border border-[#1f1f1f] bg-[#111] p-5 transition-all duration-200 hover:border-[#333] last:mb-0"
+                    className="mb-3 rounded-xl border border-subtle bg-card p-5 transition-all duration-200 hover:border-hover last:mb-0"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center">
-                        <div className="text-sm font-semibold text-white">{skill.name}</div>
+                        <div className="text-sm font-semibold text-primary">{skill.name}</div>
                         <span
                           className={`ml-2 rounded-full px-2 py-0.5 text-xs ${
                             skill.status === "completed"
                               ? "bg-green-500/10 text-green-400"
                               : skill.status === "in_progress"
                                 ? "bg-indigo-500/10 text-indigo-400"
-                                : "bg-[#1f1f1f] text-[#444]"
+                                : "bg-skeleton text-muted"
                           }`}
                         >
                           {skill.status === "completed"
@@ -298,13 +298,13 @@ const Progress = () => {
                       </div>
                       <div
                         className={`text-sm font-semibold ${
-                          skill.status === "completed" ? "text-green-400" : "text-white"
+                          skill.status === "completed" ? "text-green-400" : "text-primary"
                         }`}
                       >
                         {skill.progressPercentage}%
                       </div>
                     </div>
-                    <div className="mt-2 flex items-center gap-2 text-xs text-[#666]">
+                    <div className="mt-2 flex items-center gap-2 text-xs text-secondary">
                       <span>
                         {skill.completedTasks} / {skill.totalTasks} tasks
                       </span>
@@ -313,14 +313,14 @@ const Progress = () => {
                         {skill.completedTopics} / {skill.totalTopics} topics
                       </span>
                     </div>
-                    <div className="mt-3 h-1.5 w-full rounded-full bg-[#1f1f1f]">
+                    <div className="mt-3 h-1.5 w-full rounded-full bg-skeleton">
                       <div
                         className={`h-1.5 rounded-full transition-all duration-500 ${
                           skill.status === "completed"
                             ? "bg-green-500"
                             : skill.status === "in_progress"
                               ? "bg-[#6366f1]"
-                              : "bg-[#1f1f1f]"
+                              : "bg-skeleton"
                         }`}
                         style={{ width: `${skill.progressPercentage}%` }}
                       />
@@ -333,35 +333,35 @@ const Progress = () => {
             {showHighlights && (
               <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {insights?.strongestSkill && (
-                  <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5">
-                    <div className="flex items-center text-xs uppercase tracking-wide text-[#666]">
+                  <div className="rounded-xl border border-subtle bg-card p-5">
+                    <div className="flex items-center text-xs uppercase tracking-wide text-secondary">
                       <TrendingUp size={16} className="text-green-400" />
                       <span className="ml-2">Strongest Skill</span>
                     </div>
-                    <div className="mt-3 text-lg font-bold text-white">
+                    <div className="mt-3 text-lg font-bold text-primary">
                       {insights.strongestSkill.name}
                     </div>
                     <div className="mt-1 text-2xl font-bold text-green-400">
                       {insights.strongestSkill.progressPercentage}% complete
                     </div>
-                    <div className="mt-2 text-xs text-[#666]">
+                    <div className="mt-2 text-xs text-secondary">
                       Your best performing skill. Keep it up!
                     </div>
                   </div>
                 )}
                 {insights?.weakestSkill && (
-                  <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-5">
-                    <div className="flex items-center text-xs uppercase tracking-wide text-[#666]">
+                  <div className="rounded-xl border border-subtle bg-card p-5">
+                    <div className="flex items-center text-xs uppercase tracking-wide text-secondary">
                       <Target size={16} className="text-yellow-400" />
                       <span className="ml-2">Focus Area</span>
                     </div>
-                    <div className="mt-3 text-lg font-bold text-white">
+                    <div className="mt-3 text-lg font-bold text-primary">
                       {insights.weakestSkill.name}
                     </div>
                     <div className="mt-1 text-2xl font-bold text-yellow-400">
                       {insights.weakestSkill.progressPercentage}% complete
                     </div>
-                    <div className="mt-2 text-xs text-[#666]">
+                    <div className="mt-2 text-xs text-secondary">
                       Spend more time here to build momentum.
                     </div>
                   </div>

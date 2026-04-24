@@ -36,20 +36,20 @@ const ActivityTimeline = ({ items }) => {
 
   return (
     <div>
-      <div className="mb-4 text-sm font-semibold text-white">Activity</div>
-      <div className="relative border-l border-neutral-800 pl-10">
+      <div className="mb-4 text-sm font-semibold text-primary">Activity</div>
+      <div className="relative border-l border-subtle pl-10">
         {items.map((item) => {
           const Icon = iconMap[item.type] || CheckCircle;
           return (
             <div key={item.id} className="relative pb-6 last:pb-0">
               <div className="flex items-start gap-4">
-                <span className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-[#111] ring-2 ring-[#1f1f1f]">
+                <span className="mt-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-card ring-2 ring-subtle">
                   <Icon className="h-4 w-4 text-[#6366f1]" />
                 </span>
                 <div>
-                  <div className="text-sm text-white">{item.title}</div>
+                  <div className="text-sm text-primary">{item.title}</div>
                   <div
-                    className="text-xs text-[#666]"
+                    className="text-xs text-secondary"
                     title={new Date(item.timestamp).toLocaleString("en-IN", {
                       timeZone: "Asia/Kolkata",
                       dateStyle: "medium",

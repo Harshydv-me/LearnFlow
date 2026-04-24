@@ -14,10 +14,10 @@ const TopicDetails = ({
 }) => {
   if (!topic) {
     return (
-      <div className="flex h-full flex-col items-center justify-center rounded-xl border border-[#1f1f1f] bg-[#111] p-10 text-center text-[#666]">
-        <ChevronLeft size={48} className="text-[#333]" />
-        <div className="mt-4 text-sm text-white">Select a topic from the roadmap</div>
-        <div className="mt-1 text-xs text-[#666]">
+      <div className="flex h-full flex-col items-center justify-center rounded-xl border border-subtle bg-card p-10 text-center text-secondary">
+        <ChevronLeft size={48} className="text-muted" />
+        <div className="mt-4 text-sm text-primary">Select a topic from the roadmap</div>
+        <div className="mt-1 text-xs text-secondary">
           Click any unlocked topic to view its tasks
         </div>
       </div>
@@ -44,23 +44,23 @@ const TopicDetails = ({
     ? "bg-green-500/10 text-green-400"
     : topic.isCurrent
       ? "bg-indigo-500/10 text-indigo-400"
-      : "bg-[#1f1f1f] text-[#444]";
+      : "bg-skeleton text-muted";
 
   return (
     <div
-      className="max-h-[calc(100vh-200px)] overflow-y-auto pr-2 [scrollbar-width:thin] [scrollbar-color:#333_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-[#333]"
+      className="max-h-[calc(100vh-200px)] overflow-y-auto pr-2 [scrollbar-width:thin] [scrollbar-color:var(--border-hover)_transparent] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted"
     >
-      <div className="rounded-xl border border-[#1f1f1f] bg-[#111] p-6">
-        <div className="text-xl font-bold text-white">{topic.title}</div>
-        <div className="mt-1 text-sm text-[#666]">{topic.description}</div>
+      <div className="rounded-xl border border-subtle bg-card p-6">
+        <div className="text-xl font-bold text-primary">{topic.title}</div>
+        <div className="mt-1 text-sm text-secondary">{topic.description}</div>
 
-        <div className="mt-4 flex items-center justify-between text-xs text-[#666]">
+        <div className="mt-4 flex items-center justify-between text-xs text-secondary">
           <span>
             {topic.completedTasks} / {topic.totalTasks} tasks
           </span>
           <span>{progress}%</span>
         </div>
-        <div className="mt-2 h-1.5 w-full rounded-full bg-[#1f1f1f]">
+        <div className="mt-2 h-1.5 w-full rounded-full bg-skeleton">
           <div
             className={`h-1.5 rounded-full ${
               topic.isCompleted || allTasksDone ? "bg-green-500" : "bg-[#6366f1]"
@@ -101,7 +101,7 @@ const TopicDetails = ({
             {Array.from({ length: 4 }).map((_, idx) => (
               <div
                 key={idx}
-                className="h-20 w-full animate-pulse rounded-xl bg-[#1f1f1f]"
+                className="h-20 w-full animate-pulse rounded-xl bg-skeleton"
               />
             ))}
           </div>
@@ -116,7 +116,7 @@ const TopicDetails = ({
               return (
                 <div
                   key={task.id}
-                  className="flex items-start gap-4 rounded-xl border border-[#1f1f1f] bg-[#111] p-4 transition-all duration-200 hover:border-[#333]"
+                  className="flex items-start gap-4 rounded-xl border border-subtle bg-card p-4 transition-all duration-200 hover:border-hover"
                 >
                   <div className="pt-0.5">
                     {isCompleted ? (
@@ -146,7 +146,7 @@ const TopicDetails = ({
                         )}
                       </button>
                     ) : (
-                      <Lock size={16} className="text-[#333]" />
+                      <Lock size={16} className="text-muted" />
                     )}
                   </div>
 
@@ -154,15 +154,15 @@ const TopicDetails = ({
                     <div
                       className={`text-sm font-medium ${
                         isCompleted
-                          ? "text-[#666] line-through"
+                          ? "text-secondary line-through"
                           : isUnlocked
-                            ? "text-white"
-                            : "text-[#444]"
+                            ? "text-primary"
+                            : "text-muted"
                       }`}
                     >
                       {task.title}
                     </div>
-                    <div className="mt-0.5 text-xs text-[#666]">
+                    <div className="mt-0.5 text-xs text-secondary">
                       {task.description}
                     </div>
                   </div>
@@ -177,7 +177,7 @@ const TopicDetails = ({
                         Start
                       </span>
                     ) : (
-                      <span className="rounded-full bg-[#1f1f1f] px-2 py-0.5 text-xs text-[#444]">
+                      <span className="rounded-full bg-skeleton px-2 py-0.5 text-xs text-muted">
                         Locked
                       </span>
                     )}
@@ -187,8 +187,8 @@ const TopicDetails = ({
                         onClick={() => onTaskLearn?.(task)}
                         className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs transition-all duration-200 ${
                           isCompleted
-                            ? "border-[#1f1f1f] bg-[#1a1a1f] text-[#444]"
-                            : "border-[#1f1f1f] bg-[#1a1a1f] text-[#666] hover:border-[#6366f1] hover:bg-indigo-500/10 hover:text-[#6366f1]"
+                            ? "border-subtle bg-card-hover text-muted"
+                            : "border-subtle bg-card-hover text-secondary hover:border-[#6366f1] hover:bg-indigo-500/10 hover:text-[#6366f1]"
                         }`}
                       >
                         <BookOpen size={14} />

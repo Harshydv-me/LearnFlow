@@ -10,7 +10,7 @@ const ProgressRing = ({ progress, label }) => {
     <div className="flex flex-col items-center">
       <svg height={radius * 2} width={radius * 2} className="mb-4">
         <circle
-          stroke="#1f1f1f"
+          stroke="var(--skeleton)"
           fill="transparent"
           strokeWidth={stroke}
           r={normalizedRadius}
@@ -30,9 +30,9 @@ const ProgressRing = ({ progress, label }) => {
           style={{ transition: "stroke-dashoffset 500ms ease" }}
         />
       </svg>
-      <div className="text-3xl font-bold text-white">{clamped}%</div>
-      <div className="mt-1 text-xs text-[#666]">{label}</div>
-      <div className="mt-3 text-xs text-[#666]">
+      <div className="text-3xl font-bold text-primary">{clamped}%</div>
+      <div className="mt-1 text-xs text-secondary">{label}</div>
+      <div className="mt-3 text-xs text-secondary">
         Keep it up — you are making consistent progress.
       </div>
     </div>
