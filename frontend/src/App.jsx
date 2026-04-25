@@ -18,44 +18,47 @@ const App = () => {
     setToken(localStorage.getItem("token"));
   }, [location.pathname]);
 
+  // Use the actual current storage value for routing decisions to avoid sync lag
+  const currentToken = localStorage.getItem("token");
+
   return (
     <Routes>
       <Route
         path="/"
-        element={token ? <Navigate to="/dashboard" replace /> : <LandingPage />}
+        element={currentToken ? <Navigate to="/dashboard" replace /> : <LandingPage />}
       />
       <Route
         path="/login"
-        element={token ? <Navigate to="/dashboard" replace /> : <Login setToken={setToken} />}
+        element={currentToken ? <Navigate to="/dashboard" replace /> : <Login setToken={setToken} />}
       />
       <Route
         path="/dashboard"
-        element={token ? <Dashboard token={token} /> : <Navigate to="/login" replace />}
+        element={currentToken ? <Dashboard token={currentToken} /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/roadmap"
-        element={token ? <Roadmap /> : <Navigate to="/login" replace />}
+        element={currentToken ? <Roadmap /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/learning"
-        element={token ? <LearningHub /> : <Navigate to="/login" replace />}
+        element={currentToken ? <LearningHub /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/profile"
-        element={token ? <Profile /> : <Navigate to="/login" replace />}
+        element={currentToken ? <Profile /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/progress"
-        element={token ? <Progress /> : <Navigate to="/login" replace />}
+        element={currentToken ? <Progress /> : <Navigate to="/login" replace />}
       />
       <Route
         path="/search"
-        element={token ? <SearchPage /> : <Navigate to="/login" replace />}
+        element={currentToken ? <SearchPage /> : <Navigate to="/login" replace />}
       />
       <Route path="/u/:username" element={<PublicProfile />} />
       <Route
         path="/*"
-        element={token ? <Navigate to="/dashboard" replace /> : <Navigate to="/" replace />}
+        element={currentToken ? <Navigate to="/dashboard" replace /> : <Navigate to="/" replace />}
       />
     </Routes>
   );

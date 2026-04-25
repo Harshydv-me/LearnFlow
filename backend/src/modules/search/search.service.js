@@ -68,9 +68,22 @@ export const search = async (query, userId) => {
     };
   });
 
+  const usersResult = await pool.query(
+    `SELECT id, display_name, username
+     FROM users
+     WHERE (LOWER(display_name) LIKE LOWER($1) OR LOWER(username) LIKE LOWER($1))
+       AND id <> $2
+     ORDER BY
+       CASE WHEN LOWER(username) LIKE LOWER($3) THEN 0 ELSE 1 END,
+       display_name ASC
+     LIMIT 5`,
+    [like, userId, startsWith]
+  );
+
   return {
     query: trimmed,
     skills: skillsResult.rows,
-    topics
+    topics,
+    users: usersResult.rows
   };
 };

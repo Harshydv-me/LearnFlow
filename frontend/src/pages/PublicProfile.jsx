@@ -48,14 +48,7 @@ const PublicProfile = () => {
   return (
     <div className="min-h-screen bg-main text-primary">
       <nav className="flex items-center justify-between border-b border-subtle bg-card px-6 py-4">
-        <div className="text-lg font-bold text-primary">LearnFlow</div>
-        <button
-          type="button"
-          onClick={() => navigate("/login")}
-          className="rounded-lg border border-subtle px-4 py-2 text-sm text-secondary transition-all duration-200 hover:text-primary"
-        >
-          Sign Up Free
-        </button>
+        <div className="text-lg font-bold text-primary">Tracks</div>
       </nav>
 
       {notFound ? (
@@ -117,91 +110,99 @@ const PublicProfile = () => {
 
           <div className="mt-8">
             <div className="mb-6 text-xl font-bold text-primary">Tracks</div>
-            {(profile?.skills || []).map((skill) => (
-              <div
-                key={skill.id}
-                className={`mb-4 rounded-xl border bg-card p-6 transition-all duration-200 hover:border-hover ${
-                  skill.isVerified ? "border-green-500/30" : "border-subtle"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <div className="text-lg font-semibold text-primary">{skill.name}</div>
-                    {skill.isVerified && (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-green-500/10 px-2.5 py-1 text-xs text-green-400">
-                        <BadgeCheck size={12} />
-                        Verified
-                      </span>
-                    )}
-                  </div>
-                  <div
-                    className={`text-lg font-bold ${
-                      skill.progressPercentage === 100
-                        ? "text-green-400"
-                        : skill.progressPercentage > 0
-                          ? "text-primary"
-                          : "text-muted"
-                    }`}
-                  >
-                    {skill.progressPercentage}%
-                  </div>
-                </div>
-                <div className="mt-1 text-sm text-secondary">{skill.description}</div>
-                <div className="mt-4 h-2 w-full rounded-full bg-skeleton">
-                  <div
-                    className={`h-2 rounded-full transition-all duration-500 ${
-                      skill.isVerified
-                        ? "bg-green-500"
-                        : skill.progressPercentage > 0
-                          ? "bg-[#6366f1]"
-                          : "bg-skeleton"
-                    }`}
-                    style={{ width: `${skill.progressPercentage}%` }}
-                  />
-                </div>
-                
-                {skill.topics && skill.topics.length > 0 && (
-                  <div className="mt-6 space-y-3">
-                    <div className="text-xs font-semibold uppercase tracking-wider text-muted">
-                      Topic Progress
+            {(profile?.skills || [])
+              .filter((skill) => skill.completedTasks > 0)
+              .map((skill) => (
+                <div
+                  key={skill.id}
+                  className={`mb-4 rounded-xl border bg-card p-6 transition-all duration-200 hover:border-hover ${
+                    skill.isVerified ? "border-green-500/30" : "border-subtle"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <div className="text-lg font-semibold text-primary">{skill.name}</div>
+                      {skill.isVerified && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-green-500/10 px-2.5 py-1 text-xs text-green-400">
+                          <BadgeCheck size={12} />
+                          Verified
+                        </span>
+                      )}
                     </div>
-                    {skill.topics.map((topic) => (
-                      <div
-                        key={topic.id}
-                        className="flex items-center justify-between rounded-lg bg-main px-4 py-3 border border-subtle"
-                      >
-                        <div className="text-sm text-[#999]">{topic.title}</div>
-                        {topic.score !== null ? (
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-bold text-green-400">
-                              {topic.score}/10
-                            </span>
-                            <BadgeCheck size={16} className="text-green-400" />
-                          </div>
-                        ) : (
-                          <span className="text-xs text-muted">Not verified</span>
-                        )}
-                      </div>
-                    ))}
+                    <div
+                      className={`text-lg font-bold ${
+                        skill.progressPercentage === 100
+                          ? "text-green-400"
+                          : skill.progressPercentage > 0
+                            ? "text-primary"
+                            : "text-muted"
+                      }`}
+                    >
+                      {skill.progressPercentage}%
+                    </div>
                   </div>
-                )}
-
-                <div className="mt-4 flex items-center justify-between text-xs text-secondary">
-                  <span>
-                    {skill.completedTasks} / {skill.totalTasks} tasks
-                  </span>
-                  {skill.isVerified && (
-                    <div className="flex items-center gap-2 rounded-full bg-green-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-green-400">
-                      Final Result: {skill.totalCorrect} / {skill.maxSkillScore}
+                  <div className="mt-1 text-sm text-secondary">{skill.description}</div>
+                  <div className="mt-4 h-2 w-full rounded-full bg-skeleton">
+                    <div
+                      className={`h-2 rounded-full transition-all duration-500 ${
+                        skill.isVerified
+                          ? "bg-green-500"
+                          : skill.progressPercentage > 0
+                            ? "bg-[#6366f1]"
+                            : "bg-skeleton"
+                      }`}
+                      style={{ width: `${skill.progressPercentage}%` }}
+                    />
+                  </div>
+                  
+                  {skill.topics && skill.topics.length > 0 && (
+                    <div className="mt-6 space-y-3">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-muted">
+                        Topic Progress
+                      </div>
+                      {skill.topics.map((topic) => (
+                        <div
+                          key={topic.id}
+                          className="flex items-center justify-between rounded-lg bg-main px-4 py-3 border border-subtle"
+                        >
+                          <div className="text-sm text-[#999]">{topic.title}</div>
+                          {topic.score !== null ? (
+                            <div className="flex items-center gap-2">
+                              <span className="text-sm font-bold text-green-400">
+                                {topic.score}/10
+                              </span>
+                              <BadgeCheck size={16} className="text-green-400" />
+                            </div>
+                          ) : (
+                            <span className="text-xs text-muted">Not verified</span>
+                          )}
+                        </div>
+                      ))}
                     </div>
                   )}
+
+                  <div className="mt-4 flex items-center justify-between text-xs text-secondary">
+                    <span>
+                      {skill.completedTasks} / {skill.totalTasks} tasks
+                    </span>
+                    {skill.isVerified && (
+                      <div className="flex items-center gap-2 rounded-full bg-green-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-green-400">
+                        Final Result: {skill.totalCorrect} / {skill.maxSkillScore}
+                      </div>
+                    )}
+                  </div>
                 </div>
+              ))}
+            {(profile?.skills || []).filter((skill) => skill.completedTasks > 0).length === 0 && (
+              <div className="rounded-xl border border-dashed border-subtle p-12 text-center">
+                <Zap size={32} className="mx-auto text-muted mb-4" />
+                <p className="text-secondary">No tracks started yet.</p>
               </div>
-            ))}
+            )}
           </div>
 
           <footer className="mt-16 border-t border-subtle py-8 text-center">
-            <div className="text-xs text-muted">Powered by LearnFlow</div>
+            <div className="text-xs text-muted">Powered by Tracks</div>
             <div className="mt-1 text-xs text-muted">Track your learning journey</div>
             <button
               type="button"

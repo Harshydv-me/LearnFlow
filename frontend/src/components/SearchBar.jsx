@@ -31,7 +31,7 @@ const highlightMatch = (text, query) => {
 const SearchBar = () => {
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState({ skills: [], topics: [] });
+  const [results, setResults] = useState({ skills: [], topics: [], users: [] });
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
@@ -39,7 +39,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (query.trim().length < 2) {
-      setResults({ skills: [], topics: [] });
+      setResults({ skills: [], topics: [], users: [] });
       setIsOpen(false);
       return;
     }
@@ -48,7 +48,11 @@ const SearchBar = () => {
       setLoading(true);
       const data = await searchContent(query.trim());
       if (data) {
-        setResults(data);
+        setResults({
+          skills: data.skills || [],
+          topics: data.topics || [],
+          users: data.users || []
+        });
         setIsOpen(true);
       }
       setLoading(false);
@@ -84,14 +88,17 @@ const SearchBar = () => {
   };
 
   const handleResultClick = useCallback(
-    (type, id) => {
+    (type, data) => {
       setIsOpen(false);
       setQuery("");
       if (type === "skill") {
-        navigate(`/roadmap?skillId=${id}`);
+        navigate(`/roadmap?skillId=${data}`);
       }
       if (type === "topic") {
-        navigate(`/roadmap?topicId=${id}`);
+        navigate(`/roadmap?topicId=${data}`);
+      }
+      if (type === "user") {
+        navigate(`/u/${data}`);
       }
     },
     [navigate]
@@ -195,7 +202,33 @@ const SearchBar = () => {
             </div>
           )}
 
-          {results.skills.length === 0 && results.topics.length === 0 && !loading && (
+          {results.users && results.users.length > 0 && (
+            <div>
+              <div className="border-b border-subtle bg-main px-4 py-2 text-xs font-medium uppercase tracking-wider text-muted">
+                Users
+              </div>
+              {results.users.map((user) => (
+                <div
+                  key={user.id}
+                  onClick={() => handleResultClick("user", user.username)}
+                  className="flex cursor-pointer items-center gap-3 border-b border-[#0f0f0f] px-4 py-3 transition-colors duration-150 hover:bg-card-hover last:border-0"
+                >
+                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-500 text-[10px] font-bold text-white uppercase">
+                    {user.display_name.slice(0, 2)}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-sm font-medium text-primary">
+                      {highlightMatch(user.display_name, query)}
+                    </div>
+                    <div className="text-xs text-secondary">@{user.username}</div>
+                  </div>
+                  <ChevronRight size={14} className="text-muted" />
+                </div>
+              ))}
+            </div>
+          )}
+
+          {results.skills.length === 0 && results.topics.length === 0 && (!results.users || results.users.length === 0) && !loading && (
             <div className="px-4 py-6 text-center">
               <Search size={20} className="mx-auto text-muted" />
               <div className="mt-2 text-sm text-secondary">No results for "{query}"</div>

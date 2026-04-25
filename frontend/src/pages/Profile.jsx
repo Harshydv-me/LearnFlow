@@ -8,7 +8,8 @@ import {
   Flame,
   Layers,
   Loader2,
-  X
+  X,
+  Share2
 } from "lucide-react";
 import Navbar from "../components/Navbar.jsx";
 import StreakHeatmap from "../components/StreakHeatmap.jsx";
@@ -34,6 +35,16 @@ const Profile = () => {
   const [savingName, setSavingName] = useState(false);
   const [nameError, setNameError] = useState("");
   const [nameSaved, setNameSaved] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = () => {
+    const username = profile?.user?.username;
+    if (!username) return;
+    const url = `${window.location.origin}/u/${username}`;
+    navigator.clipboard.writeText(url);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -207,6 +218,26 @@ const Profile = () => {
                   <div className="mt-1 text-sm text-secondary">{profile?.user?.email}</div>
                   <div className="mt-1 text-xs text-muted">
                     Member since {profile?.user?.member_since}
+                  </div>
+                  
+                  <div className="mt-4">
+                    <button
+                      onClick={handleShare}
+                      disabled={!profile?.user?.username}
+                      className="flex items-center gap-2 rounded-lg border border-subtle bg-main px-4 py-2 text-sm font-medium text-primary transition-all duration-200 hover:border-hover hover:bg-card-hover disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {copied ? (
+                        <>
+                          <Check size={16} className="text-green-500" />
+                          <span className="text-green-500">Copied Link!</span>
+                        </>
+                      ) : (
+                        <>
+                          <Share2 size={16} className="text-[#6366f1]" />
+                          <span>Share Public Profile</span>
+                        </>
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>

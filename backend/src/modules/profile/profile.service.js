@@ -10,7 +10,7 @@ const formatMemberSince = (dateValue) => {
 
 export const getProfileData = async (userId) => {
   const userResult = await pool.query(
-    `SELECT id, display_name, email, created_at
+    `SELECT id, display_name, email, username, created_at
      FROM users
      WHERE id = $1`,
     [userId]
@@ -57,6 +57,7 @@ export const getProfileData = async (userId) => {
       id: userRow?.id ?? userId,
       display_name: userRow?.display_name || "",
       email: userRow?.email || "",
+      username: userRow?.username || "",
       member_since: formatMemberSince(userRow?.created_at)
     },
     stats: {

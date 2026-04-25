@@ -25,25 +25,29 @@ const SearchPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const query = useMemo(() => searchParams.get("q") || "", [searchParams]);
-  const [results, setResults] = useState({ skills: [], topics: [] });
+  const [results, setResults] = useState({ skills: [], topics: [], users: [] });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const runSearch = async () => {
       if (query.trim().length < 2) {
-        setResults({ skills: [], topics: [] });
+        setResults({ skills: [], topics: [], users: [] });
         setLoading(false);
         return;
       }
       setLoading(true);
       const data = await searchContent(query.trim());
-      setResults(data || { skills: [], topics: [] });
+      setResults({
+        skills: data.skills || [],
+        topics: data.topics || [],
+        users: data.users || []
+      });
       setLoading(false);
     };
     runSearch();
   }, [query]);
 
-  const totalResults = results.skills.length + results.topics.length;
+  const totalResults = results.skills.length + results.topics.length + (results.users?.length || 0);
 
   return (
     <div className="min-h-screen bg-main text-primary">
@@ -92,7 +96,7 @@ const SearchPage = () => {
               No results for "{query}"
             </div>
             <div className="mt-2 text-sm text-secondary">
-              Try searching for a different skill or topic
+              Try searching for a different track, topic, or user
             </div>
             <button
               type="button"
@@ -102,6 +106,37 @@ const SearchPage = () => {
               Browse All Tracks →
             </button>
           </div>
+        )}
+
+        {!loading && results.users && results.users.length > 0 && (
+          <section className="mt-8">
+            <div className="mb-3 flex items-center text-sm font-semibold text-primary">
+              Users
+              <span className="ml-2 rounded-full bg-skeleton px-2 py-0.5 text-xs text-secondary">
+                {results.users.length}
+              </span>
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {results.users.map((user) => (
+                <div
+                  key={user.id}
+                  onClick={() => navigate(`/u/${user.username}`)}
+                  className="flex cursor-pointer items-center gap-4 rounded-xl border border-subtle bg-card p-4 transition-all duration-200 hover:border-hover"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500 text-lg font-bold text-white uppercase">
+                    {user.display_name.slice(0, 2)}
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-base font-semibold text-primary">
+                      {highlightMatch(user.display_name, query)}
+                    </div>
+                    <div className="text-sm text-secondary">@{user.username}</div>
+                  </div>
+                  <ChevronRight size={18} className="text-muted" />
+                </div>
+              ))}
+            </div>
+          </section>
         )}
 
         {!loading && results.skills.length > 0 && (
